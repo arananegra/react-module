@@ -8,16 +8,10 @@
     "jsx": "react",
     "sourceMap": true,
     "noLib": false,
-    "suppressImplicitAnyIndexErrors": true,
-    "baseUrl": "./src/",
-    "paths": {
-      "layout": ["layout"],
-      "scenes": ["scenes"],
-      "core": ["core"],
-      "pods": ["pods"],
-      "common": ["common"]
-    }
+    "suppressImplicitAnyIndexErrors": true
   },
   "compileOnSave": false,
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
