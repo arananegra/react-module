@@ -17,7 +17,7 @@ module.exports = merge(common, {
     },
 
     devServer: {
-        stats: "errors-only",
+        stats: "minimal",
         historyApiFallback: true,
         disableHostCheck: true,
         contentBase: './dist',

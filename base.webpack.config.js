@@ -5,7 +5,14 @@ const basePath = __dirname;
 module.exports = {
     context: path.join(basePath, 'src'),
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss']
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss'],
+        alias: {
+            layout: path.resolve(__dirname, "./src/layout/"),
+            scenes: path.resolve(__dirname, "./src/scenes/"),
+            core: path.resolve(__dirname, "./src/core/"),
+            pods: path.resolve(__dirname, "./src/pods/"),
+            common: path.resolve(__dirname, "./src/common/"),
+          }
     },
     target: "web",
     optimization: {

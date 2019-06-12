@@ -1,10 +1,17 @@
-import * as React from "react";
-export class App extends React.Component<{}, {}> {
-    public render(): JSX.Element {
-        return (
-            <div>
-                <h1>Hola react</h1>
-            </div>
-        );
-    }
+import * as React from 'react';
+import { Provider } from "react-redux";
+import { applyMiddleware, combineReducers, createStore, compose } from "redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
+import * as ReduxThunk from "redux-thunk";
+import { LoginComponent } from 'pods/login/login.component';
+import { LoginScene } from 'scenes';
+
+
+export const App = () => {
+    return (
+        <>
+            <LoginScene/>
+        </>
+    );
 }
