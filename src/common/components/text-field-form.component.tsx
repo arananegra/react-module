@@ -1,13 +1,12 @@
-import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography/Typography';
+import * as React from 'react';
 
 interface Props {
-  name : string;
-  label : string;
-  onChange : (field : string, value) => void;
-  value : string;
-  error? : string;
+  name: string;
+  label: string;
+  onChange: (field: string, value: string) => void;
+  value: string;
+  error?: string;
   type?: string;
   onBlur?: (field: string, value) => void;
 }
@@ -22,20 +21,20 @@ const handleBlur = (field: string, onBlur) => e => {
   }
 };
 
-export const TextFieldForm : React.FC<Props> = (props) =>  {
-  const {name, label, onChange,value, error, type, onBlur} = props;
+export const TextFieldForm: React.FC<Props> = (props) => {
+  const { name, label, onChange, value, error, type, onBlur } = props;
 
-  return (  
-      <TextField
-        label={label}
-        margin="normal"
-        value={value}
-        type={type}
-        onChange={handleChange(name, onChange)}
-        onBlur={handleBlur(name, onBlur)}
-        error={Boolean(error)}
-        helperText={error}        
-      />      
+  return (
+    <TextField
+      label={label}
+      margin="normal"
+      value={value}
+      type={type}
+      onChange={handleChange(name, onChange)}
+      onBlur={handleBlur(name, onBlur)}
+      error={Boolean(error)}
+      helperText={error}
+    />
   )
 }
 

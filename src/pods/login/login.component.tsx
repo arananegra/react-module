@@ -1,26 +1,23 @@
-import * as React from "react";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import { WithStyles } from "@material-ui/core";
-import { styles } from "./login.styles";
-import withStyles from "@material-ui/styles/withStyles";
-import { CredentialsEntityVm, LoginFormErrors } from "./login.vm";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
 import { TextFieldForm } from "common/components";
+import * as React from "react";
+import { useStyles } from "./login.styles";
+import { CredentialsEntityVm } from "./login.vm";
 
 
-interface Props extends WithStyles<typeof styles> {
+export interface LoginProps {
   onLogin? : () => void;
   credentials? : CredentialsEntityVm;
   onUpdateCredentials?: (fieldId: string, value : string) => void;
-  loginFormErrors? : LoginFormErrors;  
 }
 
 
-const LoginComponentInner = (props: Props) => {
-  const { classes, onLogin, credentials, loginFormErrors, onUpdateCredentials } = props;
-  
+export const LoginComponent = (props: LoginProps) => {
+  const { onLogin, credentials, onUpdateCredentials } = props;
+  const classes = useStyles(props);
   return (
     <>
       <Card>
@@ -31,7 +28,7 @@ const LoginComponentInner = (props: Props) => {
               label="Name"
               name="username"               
               value={"Alvaro"}
-              onChange={(value) => console.log(value)}
+              onChange={(field, value) => console.log(value)}
               />
             <TextFieldForm 
               label="Password" 
@@ -49,5 +46,3 @@ const LoginComponentInner = (props: Props) => {
     </>
   );
 };
-
-export const LoginComponent = withStyles(styles)(LoginComponentInner);
