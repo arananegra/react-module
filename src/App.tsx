@@ -9,16 +9,21 @@ import { LoginComponent } from 'pods/login/login.component';
 import { routerSwitchRoutes } from "core/routes";
 import { HashRouter, Switch, Route, BrowserRouter } from "react-router-dom";
 import { LoginScene } from 'scenes';
+import { reducers } from './reducers'
 
 import { createHashHistory } from "history";
-import { reducer } from 'reducers';
 
 export const history = createHashHistory();
+
+const appReducer = combineReducers({
+    reducers,
+    router: connectRouter(history)
+});
 
 const middlewares = [ReduxThunk["default"], logger, routerMiddleware(history)];
 
 
-export const store = createStore((reducer),
+export const store = createStore((appReducer),
     composeWithDevTools(
         applyMiddleware(...middlewares))
 );

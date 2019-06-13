@@ -1,4 +1,8 @@
+import { Action } from 'redux';
+export interface BaseAction<T = any> extends Action<string> {
+  payload?: T;
+};
+
 export const actionsEnums = {
-  UPDATE_LOGIN_NAME : '[0] Update the user login name',
-  UPDATE_LOGIN_PASSWORD: '[1] Update the user password name'
+  UPDATE_LOGIN_CREDENTIALS: '[0] Update the user or password login credentials',
 }

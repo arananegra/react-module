@@ -9,35 +9,45 @@ import { CredentialsEntityVm } from "./login.vm";
 
 
 export interface LoginProps {
-  onLogin? : () => void;
-  credentials? : CredentialsEntityVm;
-  onUpdateCredentials?: (fieldId: string, value : string) => void;
+  credentials: CredentialsEntityVm;
 }
 
+export interface LoginDispatchProps {
+  onUpdateCredentials: (credentials: CredentialsEntityVm) => void;
+}
 
-export const LoginComponent = (props: LoginProps) => {
-  const { onLogin, credentials, onUpdateCredentials } = props;
-  const classes = useStyles(props);
+export const LoginComponent = (props: LoginProps & LoginDispatchProps) => {
+  const { credentials, onUpdateCredentials } = props;
+
+  const classes = useStyles(props)
+
+  const onUpdateCredentialsField = (fieldId: string, value: string) => {
+    onUpdateCredentials({
+      ...credentials,
+      [fieldId]: value
+    });
+  }
+
   return (
     <>
       <Card>
-        <CardHeader title="login"/>
+        <CardHeader title="login" />
         <CardContent>
           <div className={classes.formContainer}>
-            <TextFieldForm               
+            <TextFieldForm
               label="Name"
-              name="username"               
-              value={"Alvaro"}
-              onChange={(field, value) => console.log(value)}
-              />
-            <TextFieldForm 
-              label="Password" 
+              name="username"
+              value={credentials.username}
+              onChange={onUpdateCredentialsField}
+            />
+            <TextFieldForm
+              label="Password"
               name="password"
-              type="password"               
-              value={"credentials.password"}
-              onChange={(value) => console.log(value)}
-              />
-            <Button variant="contained" color="primary" onClick={onLogin}>
+              type="password"
+              value={credentials.password}
+              onChange={onUpdateCredentialsField}
+            />
+            <Button variant="contained" color="primary" onClick={(e) => console.log(e)}>
               Login
             </Button>
           </div>
@@ -45,4 +55,4 @@ export const LoginComponent = (props: LoginProps) => {
       </Card>
     </>
   );
-};
+}

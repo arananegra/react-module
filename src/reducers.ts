@@ -5,6 +5,6 @@ export interface State {
     loginCredentialsReducer: CredentialsState;
 }
 
-export const reducer = combineReducers<State>({
+export const reducers = combineReducers<State>({
     loginCredentialsReducer
 });

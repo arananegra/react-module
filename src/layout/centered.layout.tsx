@@ -9,7 +9,6 @@ export const CenteredLayout : React.SFC = (props) => {
         flexDirection: 'column',
         alignItems: 'center',
         marginTop: '20vh',
-        width: '100vw',
         height: '100vh',
         boxSizing: 'border-box',
         padding: '2rem',
