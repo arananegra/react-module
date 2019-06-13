@@ -3,29 +3,26 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import { TextFieldForm } from "common/components";
+import { routesLinks } from "core/routes";
 import * as React from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
+import { State } from "reducers";
+import { updateLoginCredentialsAction } from './actions';
 import { useStyles } from "./login.styles";
-import { CredentialsEntityVm } from "./login.vm";
 
-
-export interface LoginProps {
-  credentials: CredentialsEntityVm;
-}
-
-export interface LoginDispatchProps {
-  onUpdateCredentials: (credentials: CredentialsEntityVm) => void;
-}
-
-export const LoginComponent = (props: LoginProps & LoginDispatchProps) => {
-  const { credentials, onUpdateCredentials } = props;
-
-  const classes = useStyles(props)
+export const LoginComponent = () => {
+  const dispatch = useDispatch()
+  const classes = useStyles({});
+  const credentials = useSelector((state: State) => {
+    return state.loginCredentials
+  });
 
   const onUpdateCredentialsField = (fieldId: string, value: string) => {
-    onUpdateCredentials({
+    dispatch(updateLoginCredentialsAction({
       ...credentials,
       [fieldId]: value
-    });
+    }))
   }
 
   return (
@@ -47,7 +44,8 @@ export const LoginComponent = (props: LoginProps & LoginDispatchProps) => {
               value={credentials.password}
               onChange={onUpdateCredentialsField}
             />
-            <Button variant="contained" color="primary" onClick={(e) => console.log(e)}>
+
+            <Button component={Link} to={routesLinks.hotelCollection} variant="contained" color="primary">
               Login
             </Button>
           </div>

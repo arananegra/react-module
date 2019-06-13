@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import { LoginScene } from 'scenes';
 import { store } from './store';
 import { history } from './createHistory';
+import { test } from './test';
 
 export const App = () => {
   return (
@@ -13,6 +14,7 @@ export const App = () => {
       <ConnectedRouter history={history}>
         <Switch>
           <Route exact={true} path={routerSwitchRoutes.login} component={LoginScene} />
+          <Route exact={true} path={routerSwitchRoutes.hotelCollection} component={test} />
         </Switch>
       </ConnectedRouter>
     </Provider>

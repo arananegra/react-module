@@ -5,3 +5,7 @@ export const updateLoginCredentialsAction = (credentialsToUpdate: CredentialsEnt
 	type: actionsEnums.UPDATE_LOGIN_CREDENTIALS,
 	payload: credentialsToUpdate
 });
+
+export const onLoginAction = (): any => ({
+	type: actionsEnums.ON_LOGIN
+});

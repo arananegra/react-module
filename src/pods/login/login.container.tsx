@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
+/* import { connect } from 'react-redux';
 import { State } from 'reducers';
-import { updateLoginCredentialsAction } from './actions';
+import { updateLoginCredentialsAction, onLoginAction } from './actions';
 import { LoginComponent, LoginDispatchProps, LoginProps } from './login.component';
 import { CredentialsEntityVm } from './login.vm';
 
@@ -9,11 +9,12 @@ const mapStateToProps = (state: State): LoginProps => ({
 })
 
 const mapDispatchToProps = (dispatch): LoginDispatchProps => ({
-    onUpdateCredentials: (credentials: CredentialsEntityVm) => dispatch(updateLoginCredentialsAction(credentials))
+    onUpdateCredentials: (credentials: CredentialsEntityVm) => dispatch(updateLoginCredentialsAction(credentials)),
+    //onLogin: () => dispatch(onLoginAction())
 });
 
 export const LoginContainer = connect(
     mapStateToProps,
     mapDispatchToProps,
 )(LoginComponent);
-
+ */
