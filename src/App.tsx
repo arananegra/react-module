@@ -8,13 +8,13 @@ import { store } from './store';
 import { history } from './createHistory';
 
 export const App = () => {
-    return (
-        <Provider store={store}>
-            <ConnectedRouter history={history}>
-                <Switch>
-                    <Route exact={true} path={routerSwitchRoutes.login} component={LoginScene} />
-                </Switch>
-            </ConnectedRouter>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route exact={true} path={routerSwitchRoutes.login} component={LoginScene} />
+        </Switch>
+      </ConnectedRouter>
+    </Provider>
+  );
 }

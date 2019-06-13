@@ -3,11 +3,11 @@ import { CredentialsState, loginCredentialsReducer } from 'pods/login/reducer/lo
 import { connectRouter } from 'connected-react-router';
 import { history } from './createHistory';
 export interface State {
-    router: any;
-    loginCredentials: CredentialsState;
+  router: any;
+  loginCredentials: CredentialsState;
 }
 
 export const reducers = combineReducers<State>({
-    router: connectRouter(history),
-    loginCredentials: loginCredentialsReducer
+  router: connectRouter(history),
+  loginCredentials: loginCredentialsReducer
 });
