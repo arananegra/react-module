@@ -6,7 +6,7 @@ import { CredentialsEntityVm } from './login.vm';
 
 const mapStateToProps = (state: State): LoginProps => ({
     //: state.loginCredentialsReducer.username,
-    credentials: state['reducers'].loginCredentialsReducer
+    credentials: state.loginCredentials
 })
 
 const mapDispatchToProps = (dispatch): LoginDispatchProps => ({
