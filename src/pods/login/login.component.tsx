@@ -11,19 +11,22 @@ import { State } from "reducers";
 import { updateLoginCredentialsAction } from './actions';
 import { useStyles } from "./login.styles";
 
-export const LoginComponent = () => {
+const useLoginCredentials = () => {
   const dispatch = useDispatch()
-  const classes = useStyles({});
   const credentials = useSelector((state: State) => {
     return state.loginCredentials
   });
+  const updateCredentials = (fieldId: string, value: string) => dispatch(updateLoginCredentialsAction({
+    ...credentials,
+    [fieldId]: value
+  }))
+  return { credentials, updateCredentials }
+}
 
-  const onUpdateCredentialsField = (fieldId: string, value: string) => {
-    dispatch(updateLoginCredentialsAction({
-      ...credentials,
-      [fieldId]: value
-    }))
-  }
+export const LoginComponent = () => {
+  const classes = useStyles({});
+
+  const { credentials, updateCredentials } = useLoginCredentials();
 
   return (
     <>
@@ -35,14 +38,14 @@ export const LoginComponent = () => {
               label="Name"
               name="username"
               value={credentials.username}
-              onChange={onUpdateCredentialsField}
+              onChange={updateCredentials}
             />
             <TextFieldForm
               label="Password"
               name="password"
               type="password"
               value={credentials.password}
-              onChange={onUpdateCredentialsField}
+              onChange={updateCredentials}
             />
 
             <Button component={Link} to={routesLinks.hotelCollection} variant="contained" color="primary">
