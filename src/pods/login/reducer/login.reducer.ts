@@ -1,7 +1,5 @@
 import { actionsEnums, BaseAction } from "common/actionEnums";
 import { createEmptyCredentials, CredentialsEntityVm } from "../login.vm";
-import { history } from '../../../createHistory';
-import { routerSwitchRoutes } from "core/routes";
 
 export type CredentialsState = CredentialsEntityVm;
 

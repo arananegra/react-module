@@ -36,9 +36,6 @@ module.exports = {
         vendor: ['react', 'react-dom'],
         app: [
             '../index.tsx'
-        ],
-        vendorStyles: [
-            '../node_modules/bootstrap/dist/css/bootstrap.css'
         ]
     },
 

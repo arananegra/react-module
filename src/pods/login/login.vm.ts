@@ -10,7 +10,7 @@ export const createEmptyCredentials = () : CredentialsEntityVm => ({
   password: '',
 });
 
-/* export interface LoginFormErrors {
+export interface LoginFormErrors {
   username : FieldValidationResult;
   password: FieldValidationResult;
 }
@@ -18,4 +18,4 @@ export const createEmptyCredentials = () : CredentialsEntityVm => ({
 export const createDefaultLoginFormErrors = () : LoginFormErrors => ({
   username : new FieldValidationResult(),
   password: new FieldValidationResult(),
-}) */
+})
