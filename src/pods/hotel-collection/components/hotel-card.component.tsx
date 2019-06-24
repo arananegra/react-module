@@ -18,7 +18,9 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
     width: '500px',
-    marginTop: '10px'
+    marginTop: '10px',
+    marginLeft: '5px',
+    marginRight: '5px'
   }
 }));
 
