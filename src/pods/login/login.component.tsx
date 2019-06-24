@@ -10,9 +10,8 @@ import { Link } from "react-router-dom";
 import { State } from "reducers";
 import { updateLoginCredentialsAction } from './actions';
 import { useStyles } from "./login.styles";
-import { CredentialsEntityVm } from "./login.vm";
 
-/*const useLoginCredentials = () => {
+const useLoginCredentials = () => {
   const dispatch = useDispatch();
   const credentials = useSelector((state: State) => {
     return state.loginCredentials
@@ -22,27 +21,12 @@ import { CredentialsEntityVm } from "./login.vm";
     [fieldId]: value
   }))
   return {credentials, updateCredentials}
-}*/
-export interface LoginProps {
-  onLogin? : () => void;
-  credentials : CredentialsEntityVm;
 }
 
-export interface LoginDispatchProps {
-  onUpdateCredentials: (credentials: CredentialsEntityVm) => void;
-}
-
-export const LoginComponent = (props: LoginProps & LoginDispatchProps) => {
+export const LoginComponent = () => {
   const classes = useStyles({});
 
-  const { credentials, onUpdateCredentials } = props;
-
-  const onUpdateCredentialsField = (fieldId: string, value: string) => {
-    onUpdateCredentials({
-      ...credentials,
-      [fieldId]: value
-    });
-  }
+  const {credentials, updateCredentials} = useLoginCredentials();
 
   return (
     <>
@@ -54,14 +38,14 @@ export const LoginComponent = (props: LoginProps & LoginDispatchProps) => {
               label="Name"
               name="username"
               value={credentials.username}
-              onChange={onUpdateCredentialsField}
+              onChange={updateCredentials}
             />
             <TextFieldForm
               label="Password"
               name="password"
               type="password"
               value={credentials.password}
-              onChange={onUpdateCredentialsField}
+              onChange={updateCredentials}
             />
 
             <Button component={Link} to={routesLinks.hotelCollection} variant="contained" color="primary">
