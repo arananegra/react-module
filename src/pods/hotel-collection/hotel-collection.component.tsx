@@ -10,10 +10,24 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) => ({
   listLayout: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      backgroundColor: 'red',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+    },
+    [theme.breakpoints.up('md')]: {
+      backgroundColor: 'blue',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+    },
+    [theme.breakpoints.up('lg')]: {
+      backgroundColor: 'yellow',
+      display: 'flex',
+      flexWrap:'wrap',
+      justifyContent: 'space-between',
+    },
   }
 }));
 
