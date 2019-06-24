@@ -8,6 +8,8 @@
     "jsx": "react",
     "sourceMap": true,
     "noLib": false,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": true,
     "baseUrl": "./src/",
     "paths": {

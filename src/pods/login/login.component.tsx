@@ -11,7 +11,7 @@ import { State } from "reducers";
 import { updateLoginCredentialsAction } from './actions';
 import { useStyles } from "./login.styles";
 
-const useLoginCredentials = () => {
+export const useLoginCredentials = () => {
   const dispatch = useDispatch();
   const credentials = useSelector((state: State) => {
     return state.loginCredentials
@@ -24,7 +24,7 @@ const useLoginCredentials = () => {
 }
 
 export const LoginComponent = () => {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const {credentials, updateCredentials} = useLoginCredentials();
 
