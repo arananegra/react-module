@@ -10,9 +10,10 @@ import { Link } from "react-router-dom";
 import { State } from "reducers";
 import { updateLoginCredentialsAction } from './actions';
 import { useStyles } from "./login.styles";
+import { CredentialsEntityVm } from "./login.vm";
 
-const useLoginCredentials = () => {
-  const dispatch = useDispatch()
+/*const useLoginCredentials = () => {
+  const dispatch = useDispatch();
   const credentials = useSelector((state: State) => {
     return state.loginCredentials
   });
@@ -20,32 +21,47 @@ const useLoginCredentials = () => {
     ...credentials,
     [fieldId]: value
   }))
-  return { credentials, updateCredentials }
+  return {credentials, updateCredentials}
+}*/
+export interface LoginProps {
+  onLogin? : () => void;
+  credentials : CredentialsEntityVm;
 }
 
-export const LoginComponent = () => {
+export interface LoginDispatchProps {
+  onUpdateCredentials: (credentials: CredentialsEntityVm) => void;
+}
+
+export const LoginComponent = (props: LoginProps & LoginDispatchProps) => {
   const classes = useStyles({});
 
-  const { credentials, updateCredentials } = useLoginCredentials();
+  const { credentials, onUpdateCredentials } = props;
+
+  const onUpdateCredentialsField = (fieldId: string, value: string) => {
+    onUpdateCredentials({
+      ...credentials,
+      [fieldId]: value
+    });
+  }
 
   return (
     <>
       <Card>
-        <CardHeader title="login" />
+        <CardHeader title="login"/>
         <CardContent>
           <div className={classes.formContainer}>
             <TextFieldForm
               label="Name"
               name="username"
               value={credentials.username}
-              onChange={updateCredentials}
+              onChange={onUpdateCredentialsField}
             />
             <TextFieldForm
               label="Password"
               name="password"
               type="password"
               value={credentials.password}
-              onChange={updateCredentials}
+              onChange={onUpdateCredentialsField}
             />
 
             <Button component={Link} to={routesLinks.hotelCollection} variant="contained" color="primary">
