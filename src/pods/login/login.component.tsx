@@ -6,7 +6,7 @@ import { TextFieldForm } from "common/components";
 import * as React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from "reducers";
-import { onLoginRequestThunk, onUpdateLoginCredentialsActionThunk, onUpdateLoginErrorsThunk } from './actions';
+import { onLoginRequestThunk, onUpdateLoginCredentialsActionThunk } from './actions';
 import { useStyles } from "./login.styles";
 import { loginFormValidation } from "./login.validation";
 import { validateCredentials } from "./login.api";
@@ -27,16 +27,7 @@ export const useLoginCredentials = () => {
     dispatch(onUpdateLoginCredentialsActionThunk({
       ...credentials,
       [fieldId]: value
-    }))
-
-    loginFormValidation
-      .validateField(credentials, fieldId, value)
-      .then(fieldValidationResult => {
-        dispatch(onUpdateLoginErrorsThunk({
-          ...errors,
-          [fieldId]: fieldValidationResult
-        }))
-      });
+    }, fieldId, value))
   };
 
   const onLogin = () => {
@@ -51,11 +42,6 @@ export const useLoginCredentials = () => {
         );
       } else {
         alert("error, review the fields");
-
-        dispatch(onUpdateLoginErrorsThunk({
-          ...errors,
-          ...formValidationResult.fieldErrors
-        }))
       }
     });
   }

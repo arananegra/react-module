@@ -1,17 +1,36 @@
-import { actionsEnums, BaseAction } from "common/actionEnums";
-import { CredentialsEntityVm, LoginFormErrors } from '../login.vm';
+import { actionsEnums } from "common/actionEnums";
+import { CredentialsEntityVm } from '../login.vm';
 import { history } from '../../../createHistory';
 import { routerSwitchRoutes } from "core/routes";
+import { loginFormValidation } from "../login.validation";
+import { FieldValidationResult } from "lc-form-validation";
 
-export const updateLoginCredentialsAction = (credentialsToUpdate: CredentialsEntityVm): BaseAction<CredentialsEntityVm> => ({
+/////////
+export interface IUpdateLoginCredentialsAction {
+  type: string;
+  credentialsToUpdate: CredentialsEntityVm;
+}
+
+export const updateLoginCredentialsAction = (credentialsToUpdate: CredentialsEntityVm): IUpdateLoginCredentialsAction => ({
   type: actionsEnums.UPDATE_LOGIN_CREDENTIALS,
-  payload: credentialsToUpdate
+  credentialsToUpdate
 });
 
-export const updateLoginErrorsAction = (errors: LoginFormErrors): BaseAction<LoginFormErrors> => ({
+/////////
+export interface IUpdateLoginErrorsAction {
+  type: string;
+  fieldId: string;
+  value: any;
+  fieldValidationResult: FieldValidationResult;
+}
+
+export const updateLoginErrorsAction = (fieldValidationResult: FieldValidationResult, fieldId: string, value: string): IUpdateLoginErrorsAction => ({
   type: actionsEnums.UPDATE_LOGIN_ERRORS,
-  payload: errors
+  fieldId,
+  value,
+  fieldValidationResult
 });
+/////////
 
 export const onLoginAction = (): any => ({
   type: actionsEnums.ON_LOGIN
@@ -24,14 +43,19 @@ export const onLoginRequestThunk = (): any => {
   }
 }
 
-export const onUpdateLoginCredentialsActionThunk = (credentialsToUpdate: CredentialsEntityVm): Function => {
+export const onUpdateLoginCredentialsActionThunk = (updatedCredentials: CredentialsEntityVm, fieldId: string, value: string): Function => {
   return (dispatch) => {
-    dispatch(updateLoginCredentialsAction(credentialsToUpdate))
+    dispatch(updateLoginCredentialsAction(updatedCredentials))
+    loginFormValidation
+      .validateField(updatedCredentials, fieldId, value)
+      .then((fieldValidationResult: FieldValidationResult) => {
+        dispatch(onUpdateLoginFieldErrorsThunk(fieldValidationResult, fieldId, value))
+      });
   }
 }
 
-export const onUpdateLoginErrorsThunk = (errors: LoginFormErrors): Function => {
+export const onUpdateLoginFieldErrorsThunk = (fieldValidationResult: FieldValidationResult, fieldId: string, value: string): Function => {
   return (dispatch) => {
-    dispatch(updateLoginErrorsAction(errors))
+    dispatch(updateLoginErrorsAction(fieldValidationResult, fieldId, value))
   }
 }
