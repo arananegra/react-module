@@ -6,25 +6,27 @@ import { Theme } from "@material-ui/core/styles";
 
 interface Props {
   hotelCollection: HotelEntityVm[];
+  onEditHotelClick: (hotelClicked: HotelEntityVm) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   listLayout: {
-      display: 'flex',
-      flexWrap:'wrap',
-      justifyContent: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginBottom: '2%'
   }
 }));
 
 export const HotelCollectionComponent = (props: Props) => {
-  const {hotelCollection} = props;
+  const {hotelCollection, onEditHotelClick} = props;
 
   const classes = useStyles();
 
   return (
     <div className={classes.listLayout}>
       {
-        hotelCollection.map((hotel) => <HotelCard key={hotel.id} hotel={hotel}/>)
+        hotelCollection.map((hotel) => <HotelCard key={hotel.id} onEditHotelClick={onEditHotelClick} hotel={hotel}/>)
       }
     </div>
 

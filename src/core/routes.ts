@@ -20,7 +20,7 @@ export const routerSwitchRoutes : RouterSwitchRoutes = {
 }
 
 interface RoutesLinks extends BaseRoutes {
-  hotelEdit: (id : number) => string;
+  hotelEdit: (id : any) => string;
 }
 
 export const routesLinks : RoutesLinks = {

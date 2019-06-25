@@ -4,15 +4,14 @@ import { HotelEntityVm } from "../hotel-collection.vm";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { CardContent, CardMedia, Typography, CardActions } from "@material-ui/core";
+import { CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Theme } from "@material-ui/core/styles";
 
 interface Props {
   hotel: HotelEntityVm;
+  onEditHotelClick: (hotelClicked: HotelEntityVm) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,20 +24,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const HotelCard = (props: Props) => {
-  const {hotel} = props;
+  const {hotel, onEditHotelClick} = props;
 
   const classes = useStyles();
+
+  const onClickEditHotel = (e) => {
+    onEditHotelClick(hotel)
+  }
 
   return (
     <Card className={classes.card}>
       <CardHeader
         avatar={
           <Avatar aria-label="hotel">{hotel.rating}</Avatar>
-        }
-        action={
-          <IconButton>
-            <MoreVertIcon/>
-          </IconButton>
         }
         title={hotel.name}
         subheader={hotel.address}
@@ -60,11 +58,8 @@ export const HotelCard = (props: Props) => {
         </div>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to favorites">
+        <IconButton onClick={onClickEditHotel} aria-label="edit">
           <EditIcon/>
-        </IconButton>
-        <IconButton aria-label="Share">
-          <DeleteIcon/>
         </IconButton>
       </CardActions>
     </Card>
