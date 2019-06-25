@@ -1,22 +1,24 @@
 import { FieldValidationResult } from "lc-form-validation";
 
 export interface CredentialsEntityVm {
-  username : string;
-  password : string;
+  username: string;
+  password: string;
+  isUserLogged: boolean;
 }
 
-export const createEmptyCredentials = () : CredentialsEntityVm => ({
+export const createEmptyCredentials = (): CredentialsEntityVm => ({
   username: '',
   password: '',
+  isUserLogged: false
 });
 
 export interface LoginFormErrors {
-  username : FieldValidationResult;
+  username: FieldValidationResult;
   password: FieldValidationResult;
 }
 
-export const createDefaultLoginFormErrors = () : LoginFormErrors => ({
-  username : new FieldValidationResult(),
+export const createDefaultLoginFormErrors = (): LoginFormErrors => ({
+  username: new FieldValidationResult(),
   password: new FieldValidationResult(),
 })
 

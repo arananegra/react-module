@@ -11,8 +11,8 @@ export const loginReducer = (state: LoginState = defaultLoginState(), action): L
     case actionsEnums.UPDATE_LOGIN_CREDENTIALS:
       return handleCredentialsChangeAction(state, action);
 
-    case actionsEnums.ON_LOGIN:
-      return state;
+    case actionsEnums.ON_LOGIN_SUCCEED:
+      return handleLoginSucceedAction(state);
 
     case actionsEnums.UPDATE_LOGIN_ERRORS:
       return handleErrorsChangeAction(state, action);
@@ -24,6 +24,12 @@ const handleCredentialsChangeAction = (state: LoginState, action: IUpdateLoginCr
   ...state,
   credentials: action.credentialsToUpdate,
 });
+
+const handleLoginSucceedAction = (state: LoginState): LoginState => ({
+  ...state,
+  credentials: {...state.credentials, isUserLogged: true},
+});
+
 
 const handleErrorsChangeAction = (state: LoginState, action: IUpdateLoginErrorsAction): LoginState => {
   const newCredentials: CredentialsEntityVm = {

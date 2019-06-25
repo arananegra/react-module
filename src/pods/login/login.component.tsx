@@ -8,9 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from "reducers";
 import { onLoginRequestThunk, onUpdateLoginCredentialsActionThunk } from './actions';
 import { useStyles } from "./login.styles";
-import { loginFormValidation } from "./login.validation";
-import { validateCredentials } from "./login.api";
-import { FormValidationResult } from "lc-form-validation";
 import { CredentialsEntityVm, LoginFormErrors } from "./login.vm";
 
 export const useLoginCredentials = () => {
@@ -31,19 +28,7 @@ export const useLoginCredentials = () => {
   };
 
   const onLogin = () => {
-    loginFormValidation.validateForm(credentials).then((formValidationResult: FormValidationResult) => {
-      if (formValidationResult.succeeded) {
-        validateCredentials(credentials.username, credentials.password).then(
-          areValidCredentials =>
-            areValidCredentials ?
-              dispatch(onLoginRequestThunk())
-              :
-              alert("Invalid credentials")
-        );
-      } else {
-        alert("error, review the fields");
-      }
-    });
+    dispatch(onLoginRequestThunk(credentials))
   }
   return {credentials, errors, updateCredentials, onLogin}
 }

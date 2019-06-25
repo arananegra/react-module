@@ -6,14 +6,19 @@ import { Route, Switch } from "react-router-dom";
 import { LoginScene, HotelCollectionScene } from 'scenes';
 import { store } from './store';
 import { history } from './createHistory';
+import { userIsAuthenticated, userIsNotAuthenticated } from "common";
+
+export const auth = ({a: true});
 
 export const App = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route exact={true} path={routerSwitchRoutes.login} component={LoginScene}/>
-          <Route exact={true} path={routerSwitchRoutes.hotelCollection} component={HotelCollectionScene}/>
+          <Route exact={true} path={routerSwitchRoutes.login}
+                 component={userIsNotAuthenticated(LoginScene)}/>
+          <Route exact={true} path={routerSwitchRoutes.hotelCollection}
+                 component={userIsAuthenticated(HotelCollectionScene)}/>
         </Switch>
       </ConnectedRouter>
     </Provider>
