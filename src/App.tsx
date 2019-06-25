@@ -8,7 +8,7 @@ import { store } from './store';
 import { history } from './createHistory';
 import { userIsAuthenticated, userIsNotAuthenticated } from "common";
 
-export const auth = ({a: true});
+export const auth = ({a: false});
 
 export const App = () => {
   return (

@@ -45,7 +45,7 @@ export const LoginComponent = () => {
         <CardContent>
           <div className={classes.formContainer}>
             <TextFieldForm
-              label="Name"
+              label="Username"
               name="username"
               value={credentials.username}
               onChange={updateCredentials}
