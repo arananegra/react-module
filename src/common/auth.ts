@@ -4,9 +4,7 @@ import { routerSwitchRoutes } from "core/routes";
 import { auth } from "../App";
 import { State } from "../reducers";
 
-
 const locationHelper = locationHelperBuilder({});
-
 
 const userIsAuthenticatedDefaults = {
   authenticatedSelector: (state: State) => {
