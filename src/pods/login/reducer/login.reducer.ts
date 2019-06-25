@@ -1,21 +1,34 @@
 import { actionsEnums, BaseAction } from "common/actionEnums";
-import { createEmptyCredentials, CredentialsEntityVm } from "../login.vm";
+import { createDefaultLoginVm, CredentialsEntityVm, LoginFormErrors, LoginVm } from "../login.vm";
 
-export type CredentialsState = CredentialsEntityVm;
+export type LoginState = LoginVm;
 
-const defaultCredentialsState = (): CredentialsState => createEmptyCredentials();
+const defaultLoginState = (): LoginState => createDefaultLoginVm();
 
-export const loginCredentialsReducer = (state: CredentialsState = defaultCredentialsState(), action: BaseAction): CredentialsState => {
-    switch (action.type) {
-        case actionsEnums.UPDATE_LOGIN_CREDENTIALS:
-            return handleCredentialsChangeAction(action.payload);
+export const loginReducer = (state: LoginState = defaultLoginState(), action: BaseAction): LoginState => {
+  switch (action.type) {
+    case actionsEnums.UPDATE_LOGIN_CREDENTIALS:
+      return handleCredentialsChangeAction(state, action.payload);
 
-        case actionsEnums.ON_LOGIN:
-            return state;
-    }
-    return state;
+    case actionsEnums.ON_LOGIN:
+      return state;
+
+    case actionsEnums.UPDATE_LOGIN_ERRORS:
+      return handleErrorsChangeAction(state, action.payload);
+  }
+  return state;
 }
 
-const handleCredentialsChangeAction = (credentials: CredentialsEntityVm): CredentialsState => ({
-    ...credentials,
+const handleCredentialsChangeAction = (state: LoginState, credentials: CredentialsEntityVm): LoginState => {
+    let returnState: LoginState = {
+      loginErrors: state.loginErrors,
+      credentials: credentials,
+    }
+    return returnState
+  }
+;
+
+const handleErrorsChangeAction = (state: LoginState, errors: LoginFormErrors): LoginState => ({
+  loginErrors: errors,
+  credentials: state.credentials,
 });

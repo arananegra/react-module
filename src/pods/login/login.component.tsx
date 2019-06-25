@@ -16,11 +16,11 @@ import { CredentialsEntityVm, LoginFormErrors } from "./login.vm";
 export const useLoginCredentials = () => {
   const dispatch = useDispatch();
   const credentials: CredentialsEntityVm = useSelector((state: State) => {
-    return state.loginCredentials
+    return state.login.credentials
   });
 
   const errors: LoginFormErrors = useSelector((state: State) => {
-    return state.loginErrorsReducer
+    return state.login.loginErrors
   });
 
   const updateCredentials = (fieldId: string, value: string) => {

@@ -19,3 +19,13 @@ export const createDefaultLoginFormErrors = () : LoginFormErrors => ({
   username : new FieldValidationResult(),
   password: new FieldValidationResult(),
 })
+
+export interface LoginVm {
+  credentials: CredentialsEntityVm
+  loginErrors: LoginFormErrors
+}
+
+export const createDefaultLoginVm = (): LoginVm => ({
+  credentials: createEmptyCredentials(),
+  loginErrors: createDefaultLoginFormErrors()
+})
