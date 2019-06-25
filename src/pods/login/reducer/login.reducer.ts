@@ -19,16 +19,12 @@ export const loginReducer = (state: LoginState = defaultLoginState(), action: Ba
   return state;
 }
 
-const handleCredentialsChangeAction = (state: LoginState, credentials: CredentialsEntityVm): LoginState => {
-    let returnState: LoginState = {
-      loginErrors: state.loginErrors,
-      credentials: credentials,
-    }
-    return returnState
-  }
-;
+const handleCredentialsChangeAction = (state: LoginState, credentials: CredentialsEntityVm): LoginState => ({
+  ...state,
+  credentials: credentials,
+});
 
 const handleErrorsChangeAction = (state: LoginState, errors: LoginFormErrors): LoginState => ({
-  loginErrors: errors,
-  credentials: state.credentials,
+  ...state,
+  loginErrors: errors
 });
