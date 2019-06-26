@@ -30,7 +30,8 @@
     "react-router-dom": "5.0.1",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
-    "redux-auth-wrapper": "2.1.0"
+    "redux-auth-wrapper": "2.1.0",
+    "react-spring": "8.0.25"
   },
   "devDependencies": {
     "@babel/cli": "7.4.4",

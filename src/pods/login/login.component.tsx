@@ -9,6 +9,7 @@ import { State } from "reducers";
 import { onLoginRequestThunk, onUpdateLoginCredentialsActionThunk } from './actions';
 import { useStyles } from "./login.styles";
 import { CredentialsEntityVm, LoginFormErrors } from "./login.vm";
+import { useSpring, animated } from 'react-spring'
 
 export const useLoginCredentials = () => {
   const dispatch = useDispatch();
@@ -35,11 +36,15 @@ export const useLoginCredentials = () => {
 
 export const LoginComponent = () => {
   const classes = useStyles();
-
+  const springProps = useSpring({
+    config: {duration: 1000},
+    from: {opacity: 0},
+    to: {opacity: 1}
+  });
   const {credentials, errors, updateCredentials, onLogin} = useLoginCredentials();
 
   return (
-    <>
+    <animated.div style={springProps}>
       <Card>
         <CardHeader title="login"/>
         <CardContent>
@@ -71,6 +76,6 @@ export const LoginComponent = () => {
           </div>
         </CardContent>
       </Card>
-    </>
+    </animated.div>
   );
 }

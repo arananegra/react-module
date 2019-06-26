@@ -8,14 +8,14 @@ import { store } from './store';
 import { history } from './createHistory';
 import { userIsAuthenticated, userIsNotAuthenticated } from "common";
 
-export const auth = ({a: true});
+export const auth = ({a: false});
 
 export const App = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route exact={true} path={routerSwitchRoutes.login}
+          <Route exact path={routerSwitchRoutes.login}
                  component={userIsNotAuthenticated(LoginScene)}/>
           <Route exact={true} path={routerSwitchRoutes.hotelCollection}
                  component={userIsAuthenticated(HotelCollectionScene)}/>

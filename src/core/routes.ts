@@ -27,8 +27,3 @@ export const routesLinks : RoutesLinks = {
   ...appBaseRoutes,
   hotelEdit: (id) => generatePath(routerSwitchRoutes.hotelEdit, {id})
 }
-
-/*
- /hotel-edit/:id
- /hotel-edit/3
-*/
