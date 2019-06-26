@@ -1,1 +1,1 @@
-export * from './onClickEditHotelAction';
+export * from './onLoadHotelToEdit';

@@ -8,7 +8,7 @@ const defaultHotelEditState = (): HotelEditState => createDefaultHotelEditVm();
 
 export const hotelEditReducer = (state: HotelEditState = defaultHotelEditState(), action): HotelEditState => {
   switch (action.type) {
-    case actionsEnums.ON_CLICK_HOTEL_TO_EDIT:
+    case actionsEnums.ON_LOAD_HOTEL_TO_EDIT:
       return handleClickEditHotelAction(state, action);
   }
   return state;

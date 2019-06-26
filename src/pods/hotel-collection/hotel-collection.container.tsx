@@ -14,7 +14,7 @@ export const HotelCollectionContainer = () => {
 
   const onEditHotelClick = (hotel: HotelEntityVm) => {
     dispatch(setHotelCollectionYPositionAction(window.scrollY))
-    dispatch(onClickEditHotelActionThunk(hotel))
+    dispatch(onClickEditHotelActionThunk(hotel.id))
   }
 
   React.useEffect(() => {
