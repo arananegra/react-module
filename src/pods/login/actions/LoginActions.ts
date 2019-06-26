@@ -6,6 +6,7 @@ import { validateCredentials } from "../login.api";
 import { history } from "../../../createHistory";
 import { routerSwitchRoutes } from "core";
 import { trackPromise } from 'react-promise-tracker';
+import { toast } from 'react-toastify';
 
 export const onLoginRequestThunk = (credentials: CredentialsEntityVm): any => {
   return (dispatch) => {
@@ -17,12 +18,12 @@ export const onLoginRequestThunk = (credentials: CredentialsEntityVm): any => {
               history.push(routerSwitchRoutes.hotelCollection);
               dispatch(onLoginSucceedAction())
             } else {
-              alert("Invalid credentials")
+              toast.error("Credenciales invalidas");
             }
           }
         )), 'login-button');
       } else {
-        alert("error, review the fields");
+        toast.warn("Algún campo es erroneo");
       }
     });
   }

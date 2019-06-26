@@ -33,6 +33,7 @@ module.exports = {
         net: "empty"
     },
     entry: {
+        styles: './index.scss',
         vendor: ['react', 'react-dom'],
         app: [
             '../index.tsx'
