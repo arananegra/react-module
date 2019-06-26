@@ -33,6 +33,9 @@ export const LoginContainer = () => {
   const {credentials, errors, updateCredentials, onLogin} = useLoginCredentials();
 
   return (
-    <LoginComponent credentials={credentials} errors={errors} onLogin={onLogin} updateCredentials={updateCredentials}/>
+    <>
+      <LoginComponent credentials={credentials} errors={errors} onLogin={onLogin}
+                      updateCredentials={updateCredentials}/>
+    </>
   );
 }

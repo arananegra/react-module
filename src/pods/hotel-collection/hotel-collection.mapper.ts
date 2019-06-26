@@ -1,8 +1,8 @@
-import {HotelEntityApi} from './hotel-collection.api';
-import {HotelEntityVm} from './hotel-collection.vm';
-import {basePicturesUrl} from 'core';
+import { HotelEntityVm } from './hotel-collection.vm';
+import { basePicturesUrl } from 'core';
+import { HotelEntityApi } from "common";
 
-export const mapFromApiToVm = (apiEntity: HotelEntityApi) : HotelEntityVm => ({
+export const mapFromApiToVm = (apiEntity: HotelEntityApi): HotelEntityVm => ({
   id: apiEntity.id,
   picture: `${basePicturesUrl}${apiEntity.thumbNailUrl}`,
   name: apiEntity.name,
@@ -11,6 +11,6 @@ export const mapFromApiToVm = (apiEntity: HotelEntityApi) : HotelEntityVm => ({
   address: apiEntity.address1,
 });
 
-export const mapFromApiCollectionToVmCollection =  (apiEntityCollection : HotelEntityApi[]) : HotelEntityVm[] => 
+export const mapFromApiCollectionToVmCollection = (apiEntityCollection: HotelEntityApi[]): HotelEntityVm[] =>
   apiEntityCollection.map((apiEntity) => mapFromApiToVm(apiEntity));
 

@@ -2,7 +2,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import { TextFieldForm } from "common/components";
+import { LoadingCircularSpinnerComponent, TextFieldForm } from "common/components";
 import * as React from "react";
 import { useStyles } from "./login.styles";
 import { CredentialsEntityVm, LoginFormErrors } from "./login.vm";
@@ -27,7 +27,7 @@ export const LoginComponent = (props: Props) => {
   return (
     <animated.div style={springProps}>
       <Card>
-        <CardHeader title="login"/>
+        <CardHeader className={classes.tittle} title="login"/>
         <CardContent>
           <div className={classes.formContainer}>
             <TextFieldForm
@@ -45,15 +45,18 @@ export const LoginComponent = (props: Props) => {
               onChange={updateCredentials}
               error={errors.password.errorMessage}
             />
-
-            <Button
-              onClick={onLogin}
-              type="submit"
-              style={{outline: 'none'}}
-              variant="contained"
-              color="primary">
-              Login
-            </Button>
+            <LoadingCircularSpinnerComponent
+              area="login-button"
+              className={classes.spinner}>
+              <Button
+                onClick={onLogin}
+                type="submit"
+                style={{outline: 'none'}}
+                variant="contained"
+                color="primary">
+                Login
+              </Button>
+            </LoadingCircularSpinnerComponent>
           </div>
         </CardContent>
       </Card>

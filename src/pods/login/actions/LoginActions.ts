@@ -1,16 +1,17 @@
-import { actionsEnums } from "../../../common/actionEnums";
+import { actionsEnums } from "common";
 import { CredentialsEntityVm } from "../login.vm";
 import { loginFormValidation } from "../login.validation";
 import { FormValidationResult } from "lc-form-validation";
 import { validateCredentials } from "../login.api";
 import { history } from "../../../createHistory";
 import { routerSwitchRoutes } from "core";
+import { trackPromise } from 'react-promise-tracker';
 
 export const onLoginRequestThunk = (credentials: CredentialsEntityVm): any => {
   return (dispatch) => {
     loginFormValidation.validateForm(credentials).then((formValidationResult: FormValidationResult) => {
       if (formValidationResult.succeeded) {
-        validateCredentials(credentials.username, credentials.password).then(
+        trackPromise((validateCredentials(credentials.username, credentials.password).then(
           areValidCredentials => {
             if (areValidCredentials) {
               history.push(routerSwitchRoutes.hotelCollection);
@@ -19,7 +20,7 @@ export const onLoginRequestThunk = (credentials: CredentialsEntityVm): any => {
               alert("Invalid credentials")
             }
           }
-        );
+        )), 'login-button');
       } else {
         alert("error, review the fields");
       }
