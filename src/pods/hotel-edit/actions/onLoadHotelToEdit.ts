@@ -5,6 +5,7 @@ import { history } from "../../../createHistory";
 import { getHotel } from "../hotel-edit.api";
 import { mapFromApiToVm } from "../../hotel-collection/hotel-collection.mapper";
 import { toast } from "react-toastify";
+import { trackPromise } from "react-promise-tracker";
 
 export interface IOnClickEditHotelAction {
   type: string;
@@ -19,7 +20,7 @@ export const onLoadHotelToEdit = (hotelToEdit: HotelEntityVm): IOnClickEditHotel
 export const onClickEditHotelActionThunk = (hotelToEditId: string): Function => {
   return (dispatch) => {
     history.push(routesLinks.hotelEdit(hotelToEditId))
-    getHotel(hotelToEditId)
+    trackPromise(getHotel(hotelToEditId)
       .then((hotelToEditEntityApi) => {
         const hotelToEdit = mapFromApiToVm(hotelToEditEntityApi)
         dispatch(onLoadHotelToEdit(hotelToEdit))
@@ -27,6 +28,6 @@ export const onClickEditHotelActionThunk = (hotelToEditId: string): Function => 
       .catch(() => {
         history.push(routerSwitchRoutes.hotelCollection)
         toast.error("Error cargando el hotel a editar");
-      })
+      }), 'hotel-edit')
   }
 }

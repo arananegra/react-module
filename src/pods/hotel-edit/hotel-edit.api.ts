@@ -9,7 +9,7 @@ export const getHotel = (id: string): Promise<HotelEntityApi> => {
     Axios.get<HotelEntityApi>(`${getHotelUrl}/${id}`)
       .then((response) => setTimeout(() => {
         resolve(response.data);
-      }, 3000))
+      }, 100000))
       .catch(e => reject(e))
   );
 }
