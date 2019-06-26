@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const common = require('./base.webpack.config');
 const resolve = require('path').resolve;
 const forkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'development',
@@ -63,6 +64,7 @@ module.exports = merge(common, {
         new forkTsCheckerWebpackPlugin({
             tsconfig: '../tsconfig.json',
             async: false,
-        })
+        }),
+        new CleanTerminalPlugin()
     ]
 })

@@ -3,7 +3,7 @@ import { HotelEntityVm } from "./hotel-collection.vm";
 import { HotelCard } from "./components/hotel-card.component";
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Theme } from "@material-ui/core/styles";
-import { useTrail, animated } from 'react-spring'
+import { animated, useTrail } from 'react-spring'
 
 interface Props {
   hotelCollection: HotelEntityVm[];
