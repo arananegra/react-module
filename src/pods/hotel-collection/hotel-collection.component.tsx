@@ -23,7 +23,7 @@ export const HotelCollectionComponent = (props: Props) => {
   const {hotelCollection, onEditHotelClick} = props;
 
   const trail = useTrail(hotelCollection.length, {
-    from: { marginLeft: -10, opacity: 0, transform: 'translate3d(-50px,0px,0)' },
+    from: { marginLeft: -10, opacity: 0, transform: 'translate3d(0px,-20px,0)' },
     to: { marginLeft: 0, opacity: 1, transform: 'translate3d(0,0px,0)' }
   })
 

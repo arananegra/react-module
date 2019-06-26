@@ -16,7 +16,13 @@ interface Props {
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
-    width: '500px',
+    [theme.breakpoints.down('sm')]: {
+      width: '90vw',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '500px',
+    },
+    width: '90vw',
     marginTop: '10px',
     marginLeft: '5px',
     marginRight: '5px'
