@@ -1,10 +1,10 @@
 import * as React from "react";
-import { HotelEdit } from "../pods/hotel-edit/hotel-edit.component";
 import { AppBackLayout } from "../layout/app-back.layout";
 import { routerSwitchRoutes } from "core";
+import { HotelCollectionContainer } from "../pods/hotel-collection";
 
 export const HotelEditScene = () => (
   <AppBackLayout backingRoute={routerSwitchRoutes.hotelCollection}>
-    <HotelEdit/>
+    <HotelCollectionContainer/>
   </AppBackLayout>
 );

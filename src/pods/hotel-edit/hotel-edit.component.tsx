@@ -1,7 +1,5 @@
 import * as React from "react"
 import { HotelEntityVm } from "../hotel-collection/hotel-collection.vm";
-import { useSelector } from 'react-redux';
-import { State } from "../../reducers";
 import { TextFieldForm } from "../../common/components";
 import { makeStyles } from "@material-ui/styles";
 
@@ -20,25 +18,27 @@ export const useStyles = makeStyles({
   }
 });
 
-export const HotelEdit = () => {
+interface Props {
+  hotelToEdit: HotelEntityVm
+}
+
+export const HotelEditComponent = (props: Props) => {
 
   const classes = useStyles();
 
-  const hotel: HotelEntityVm = useSelector((state: State) => {
-    return state.hotelEdit.hotelSelectedToEdit
-  });
+  const {hotelToEdit} = props
 
   return (
     <div className={classes.formContainer}>
       <TextFieldForm
         label="Name"
         name="name"
-        value={hotel.name}
+        value={hotelToEdit.name}
         onChange={() => console.log()}
       />
       <div className={classes.image}>
         <img
-          src={hotel.picture}
+          src={hotelToEdit.picture}
           style={{width: '20rem'}}/>
       </div>
 
