@@ -4,44 +4,25 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import { TextFieldForm } from "common/components";
 import * as React from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { State } from "reducers";
-import { onLoginRequestThunk, onUpdateLoginCredentialsActionThunk } from './actions';
 import { useStyles } from "./login.styles";
 import { CredentialsEntityVm, LoginFormErrors } from "./login.vm";
-import { useSpring, animated } from 'react-spring'
+import { animated, useSpring } from 'react-spring'
 
-export const useLoginCredentials = () => {
-  const dispatch = useDispatch();
-  const credentials: CredentialsEntityVm = useSelector((state: State) => {
-    return state.login.credentials
-  });
-
-  const errors: LoginFormErrors = useSelector((state: State) => {
-    return state.login.loginErrors
-  });
-
-  const updateCredentials = (fieldId: string, value: string) => {
-    dispatch(onUpdateLoginCredentialsActionThunk({
-      ...credentials,
-      [fieldId]: value
-    }, fieldId, value))
-  };
-
-  const onLogin = () => {
-    dispatch(onLoginRequestThunk(credentials))
-  }
-  return {credentials, errors, updateCredentials, onLogin}
+export interface Props {
+  credentials: CredentialsEntityVm;
+  errors: LoginFormErrors;
+  updateCredentials: (fieldId: string, value: string) => void;
+  onLogin: () => void;
 }
 
-export const LoginComponent = () => {
+export const LoginComponent = (props: Props) => {
   const classes = useStyles();
   const springProps = useSpring({
     config: {duration: 1000},
     from: {opacity: 0},
     to: {opacity: 1}
   });
-  const {credentials, errors, updateCredentials, onLogin} = useLoginCredentials();
+  const {credentials, errors, updateCredentials, onLogin} = props;
 
   return (
     <animated.div style={springProps}>

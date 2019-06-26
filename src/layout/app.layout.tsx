@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { useLoginCredentials } from "../pods/login/login.component";
+import { useLoginCredentials } from "../pods/login";
 
 export const AppLayout: React.FC = props => {
 

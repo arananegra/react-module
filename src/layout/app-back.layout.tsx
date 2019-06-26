@@ -4,9 +4,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBack from "@material-ui/icons/ArrowBack";
-import { useLoginCredentials } from "../pods/login/login.component";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import { useLoginCredentials } from "../pods/login";
 
 export interface Props extends RouteComponentProps {
   backingRoute: string
