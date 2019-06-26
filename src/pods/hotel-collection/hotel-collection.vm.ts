@@ -7,19 +7,10 @@ export interface HotelEntityVm {
   address: string;
 }
 
-export const createEmptyHotelEntityVm = (): HotelEntityVm => ({
-  id: '',
-  picture: '',
-  name: '',
-  description: '',
-  rating: -1,
-  address: ''
-});
-
-export interface HotelVm {
-  hotelSelectedToEdit: HotelEntityVm
+export interface HotelCollectionVm {
+  yListPosition: number
 }
 
-export const createDefaultHotelVm = (): HotelVm => ({
-  hotelSelectedToEdit: createEmptyHotelEntityVm()
+export const createDefaultHotelVm = (): HotelCollectionVm => ({
+  yListPosition: 0
 })

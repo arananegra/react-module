@@ -1,20 +1,21 @@
 import { actionsEnums } from "common/actionEnums";
-import { createDefaultHotelVm, HotelVm } from "../hotel-collection.vm";
-import { IOnClickEditHotelAction } from "../actions";
+import { createDefaultHotelVm, HotelCollectionVm } from "../hotel-collection.vm";
+import { ISetHotelCollectionYPositionAction } from "../actions";
 
-export type HotelCollectionState = HotelVm;
+export type HotelCollectionState = HotelCollectionVm;
 
 const defaultHotelCollectionState = (): HotelCollectionState => createDefaultHotelVm();
 
 export const hotelCollectionReducer = (state: HotelCollectionState = defaultHotelCollectionState(), action): HotelCollectionState => {
   switch (action.type) {
-    case actionsEnums.ON_CLICK_EDIT_HOTEL:
-      return handleClickEditHotelAction(state, action);
+    case actionsEnums.SET_HOTEL_COLLECTION_Y_POSITION:
+      return handleSetYPositionAction(state, action);
   }
   return state;
 }
 
-const handleClickEditHotelAction = (state: HotelCollectionState, action: IOnClickEditHotelAction): HotelCollectionState => ({
+
+const handleSetYPositionAction = (state: HotelCollectionState, action: ISetHotelCollectionYPositionAction): HotelCollectionState => ({
   ...state,
-  hotelSelectedToEdit: action.hotelToEdit,
+  yListPosition: action.yPosition,
 });
