@@ -88,7 +88,7 @@ export const HotelEditComponent = (props: Props) => {
             name='rating'
           />
           {
-            hotelEditErrors.rating.succeeded ?
+            !Boolean(hotelEditErrors.rating.errorMessage) ?
               null :
               <h4>Error</h4>
           }

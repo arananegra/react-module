@@ -1,6 +1,6 @@
 import TextField from '@material-ui/core/TextField';
 import * as React from 'react';
-import { listEntity } from "../../core/list.entity";
+import { listEntity } from "core";
 import MenuItem from "@material-ui/core/MenuItem";
 
 interface Props {

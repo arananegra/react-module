@@ -1,4 +1,4 @@
-import { listEntity } from "../../core/list.entity";
+import { listEntity } from "core";
 
 export interface CityApiEntityApi extends listEntity {
 

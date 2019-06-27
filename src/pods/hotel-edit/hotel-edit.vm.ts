@@ -20,22 +20,18 @@ export const createEmptyHotelEntityVm = (): HotelEntityVm => ({
   city: ''
 });
 export interface HotelEditFormErrors {
-  id: FieldValidationResult;
   picture: FieldValidationResult;
   name: FieldValidationResult;
   description: FieldValidationResult;
   rating: FieldValidationResult;
-  address: FieldValidationResult;
   city: FieldValidationResult;
 }
 
 export const createDefaultHotelEditFormErrors = (): HotelEditFormErrors => ({
-  id: new FieldValidationResult(),
   picture:  new FieldValidationResult(),
   name:  new FieldValidationResult(),
   description:  new FieldValidationResult(),
   rating:  new FieldValidationResult(),
-  address:  new FieldValidationResult(),
   city:  new FieldValidationResult(),
 });
 
