@@ -7,9 +7,7 @@ const getHotelUrl = `${baseApiUrl}/api/hotels`;
 export const getHotel = (id: string): Promise<HotelEntityApi> => {
   return new Promise<HotelEntityApi>((resolve, reject) =>
     Axios.get<HotelEntityApi>(`${getHotelUrl}/${id}`)
-      .then((response) => setTimeout(() => {
-        resolve(response.data);
-      }, 100000))
+      .then((response) => resolve(response.data))
       .catch(e => reject(e))
   );
 }

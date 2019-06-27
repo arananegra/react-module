@@ -36,7 +36,7 @@ export const AppBackLayoutInner = (props: Props) => {
 
   return (
     <div>
-      <AppBar position="sticky">
+      <AppBar position="static">
         <Toolbar variant="dense">
           <animated.div style={springPropsArrow}>
             <IconButton onClick={navigateBack} color="inherit" aria-label="Menu">

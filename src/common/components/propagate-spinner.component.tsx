@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { usePromiseTracker } from "react-promise-tracker";
-import BounceLoader from 'react-spinners/BounceLoader';
+import { PropagateLoader } from "react-spinners";
 
 interface Props {
   area: string;
@@ -8,14 +8,14 @@ interface Props {
   children: React.ReactElement;
 }
 
-export const LoadingBounceSpinnerComponent = (props: Props) => {
-  const {promiseInProgress} = usePromiseTracker({area: props.area});
+export const LoadingPropagateSpinnerComponent = (props: Props) => {
+  const {promiseInProgress} = usePromiseTracker({area: props.area, delay: 500});
   return (
     <>
       {
         (promiseInProgress) ?
           <div className={props.className}>
-            <BounceLoader size={150}
+            <PropagateLoader size={20}
                           color={'#123abc'}/>
           </div>
           :
