@@ -18,6 +18,30 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
+
+const cities = [
+  {
+    value: 'Sin ciudad',
+    id: 'Sin ciudad',
+  },
+  {
+    value: 'Málaga',
+    id: 'Málaga',
+  },
+  {
+    value: 'Chicago',
+    id: 'Chicago',
+  },
+  {
+    value: 'Barcelona',
+    id: 'Barcelona',
+  },
+  {
+    value: 'Tokyo',
+    id: 'Tokyo',
+  },
+];
+
 export const HotelEditContainer = () => {
 
   const hotelToEdit: HotelEntityVm = useSelector((state: State) => {
@@ -29,7 +53,10 @@ export const HotelEditContainer = () => {
   return (
     <>
       <LoadingPropagateSpinnerComponent className={classes.spinner} area={'hotel-edit'}>
-        <HotelEditComponent hotelToEdit={hotelToEdit}/>
+        <HotelEditComponent
+          onClickSave={() => console.log('save')}
+          onChangeField={((fieldId, value) => console.log(fieldId, value))} cities={cities}
+          hotelToEdit={hotelToEdit}/>
       </LoadingPropagateSpinnerComponent>
     </>
   )

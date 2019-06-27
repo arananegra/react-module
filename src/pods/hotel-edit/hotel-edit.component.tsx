@@ -4,8 +4,6 @@ import { TextFieldArea, TextFieldForm } from "../../common/components";
 import StarRatings from 'react-star-ratings';
 import { Theme } from '@material-ui/core/styles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import { CityApiEntityApi } from "../../common/api-entities/city-api.entity";
 import { TextFieldSelect } from "../../common/components/text-field-select.component";
@@ -40,54 +38,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const currencies = [
-  {
-    value: 'Sin ciudad',
-    id: 'Sin ciudad',
-  },
-  {
-    value: 'Málaga',
-    id: 'Málaga',
-  },
-  {
-    value: 'Chicago',
-    id: 'Chicago',
-  },
-  {
-    value: 'Barcelona',
-    id: 'Barcelona',
-  },
-  {
-    value: 'Tokyo',
-    id: 'Tokyo',
-  },
-];
-
-
 interface Props {
   hotelToEdit: HotelEntityVm;
-  //cities: CityApiEntityApi[];
+  cities: CityApiEntityApi[];
+  onClickSave: () => void;
+  onChangeField: (fieldId: string, value: string) => void;
+
 }
 
 export const HotelEditComponent = (props: Props) => {
 
   const classes = useStyles();
 
-  const [rating, setRating] = React.useState(0);
+  const {hotelToEdit, onChangeField, cities, onClickSave} = props
 
-  const {hotelToEdit} = props
-
-  const [values, setValues] = React.useState({
-    currency: 'Málaga',
-  });
-
-  const onStarClick = (nextValue) => {
-    setRating(nextValue)
+  const onStarClick = (name) => (nextValue) => {
+    onChangeField(name, nextValue)
   }
-
-  const handleChange = (value) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({...values, [value]: event.target.value});
-  };
 
   return (
     <div className={classes.formContainer}>
@@ -95,7 +62,7 @@ export const HotelEditComponent = (props: Props) => {
         label="Name"
         name="name"
         value={hotelToEdit.name}
-        onChange={() => console.log()}
+        onChange={onChangeField}
       />
       <div className={classes.image}>
         <img
@@ -114,7 +81,7 @@ export const HotelEditComponent = (props: Props) => {
             starDimension={'4vw'}
             starSpacing={'0.5vw'}
             starRatedColor="blue"
-            changeRating={onStarClick}
+            changeRating={onStarClick('rating')}
             numberOfStars={5}
             name='rating'
           />
@@ -125,24 +92,24 @@ export const HotelEditComponent = (props: Props) => {
           <TextFieldSelect
             fullWidth={true}
             label={'Ciudades'}
-            onChange={(field, value) => console.log(field, value)}
-            value={currencies[1].value}
-            name={'Ciudades'}
-            items={currencies}/>
+            onChange={onChangeField}
+            value={cities[1].value}
+            name={'cities'}
+            items={cities}/>
         </div>
       </div>
 
       <TextFieldArea
-        name={'Descripcion'}
+        name={'Description'}
         label="Descripción"
         value={hotelToEdit.description}
         multiline={true}
-        onChange={() => console.log('')}
+        onChange={onChangeField}
         rows={4}
         fullWidth={true}/>
 
 
-      <Button onClick={() => console.log("guardar")}
+      <Button onClick={onClickSave}
               style={{outline: 'none'}}
               variant="contained"
               color="primary">
