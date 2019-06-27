@@ -1,12 +1,14 @@
 import * as React from "react"
 import { HotelEntityVm } from "../hotel-collection/hotel-collection.vm";
-import { TextFieldForm } from "../../common/components";
+import { TextFieldArea, TextFieldForm } from "../../common/components";
 import StarRatings from 'react-star-ratings';
 import { Theme } from '@material-ui/core/styles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
+import { CityApiEntityApi } from "../../common/api-entities/city-api.entity";
+import { TextFieldSelect } from "../../common/components/text-field-select.component";
 
 const useStyles = makeStyles((theme: Theme) => ({
   formContainer: {
@@ -40,26 +42,31 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const currencies = [
   {
-    value: 'USD',
-    label: '$',
+    value: 'Sin ciudad',
+    id: 'Sin ciudad',
   },
   {
-    value: 'EUR',
-    label: '€',
+    value: 'Málaga',
+    id: 'Málaga',
   },
   {
-    value: 'BTC',
-    label: '฿',
+    value: 'Chicago',
+    id: 'Chicago',
   },
   {
-    value: 'JPY',
-    label: '¥',
+    value: 'Barcelona',
+    id: 'Barcelona',
+  },
+  {
+    value: 'Tokyo',
+    id: 'Tokyo',
   },
 ];
 
 
 interface Props {
-  hotelToEdit: HotelEntityVm
+  hotelToEdit: HotelEntityVm;
+  //cities: CityApiEntityApi[];
 }
 
 export const HotelEditComponent = (props: Props) => {
@@ -71,15 +78,15 @@ export const HotelEditComponent = (props: Props) => {
   const {hotelToEdit} = props
 
   const [values, setValues] = React.useState({
-    currency: 'EUR',
+    currency: 'Málaga',
   });
 
   const onStarClick = (nextValue) => {
     setRating(nextValue)
   }
 
-  const handleChange = (name) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValues({...values, [name]: event.target.value});
+  const handleChange = (value) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValues({...values, [value]: event.target.value});
   };
 
   return (
@@ -112,37 +119,30 @@ export const HotelEditComponent = (props: Props) => {
             name='rating'
           />
         </div>
-        <TextField
-          id="cities-selector"
-          select
-          error={Boolean("Esto es un error grave")}
-          label="Seleccione ciudad"
-          className={classes.textField}
-          value={values.currency}
-          onChange={handleChange('currency')}
-          margin="normal"
-        >
-          {currencies.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+        <TextFieldSelect
+          label={'Ciudades'}
+          onChange={(field, value) => console.log(field, value)}
+          value={currencies[1].value}
+          name={'Ciudades'}
+          items={currencies}/>
       </div>
-      <TextField
-        id="standard-textarea"
+
+      <TextFieldArea
+        name={'Descripcion'}
         label="Descripción"
-        multiline
+        value={hotelToEdit.description}
+        multiline={true}
+        onChange={() => console.log('')}
         rows={4}
-        fullWidth
-        margin="normal"
-      />
-        <Button onClick={() => console.log("guardar")}
-                style={{outline: 'none'}}
-                variant="contained"
-                color="primary">
-          Guardar
-        </Button>
+        fullWidth={true}/>
+
+
+      <Button onClick={() => console.log("guardar")}
+              style={{outline: 'none'}}
+              variant="contained"
+              color="primary">
+        Guardar
+      </Button>
 
     </div>
   )
