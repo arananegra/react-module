@@ -17,7 +17,7 @@ export const hotelEditReducer = (state: HotelEditState = defaultHotelEditState()
       return handleHotelEditChangeAction(state, action);
 
     case actionsEnums.UPDATE_HOTEL_EDIT_ERRORS:
-      return handleHotelEditErrorsChangeAction(state, action)
+      return handleHotelEditErrorsChangeAction(state, action);
   }
   return state;
 }
@@ -33,11 +33,6 @@ const handleHotelEditChangeAction = (state: HotelEditState, action: IUpdateHotel
 });
 
 const handleHotelEditErrorsChangeAction = (state: HotelEditState, action: IUpdateHotelEditErrorsAction): HotelEditState => {
-  const newHotelEdit: HotelEntityVm = {
-    ...state.hotelSelectedToEdit,
-    [action.fieldId]: action.value
-  };
-
   const newHotelEditErrors: HotelEditFormErrors = {
     ...state.hotelEditFormErrors,
     [action.fieldId]: action.fieldValidationResult
@@ -45,7 +40,7 @@ const handleHotelEditErrorsChangeAction = (state: HotelEditState, action: IUpdat
 
   return {
     ...state,
-    hotelSelectedToEdit: newHotelEdit,
+    hotelSelectedToEdit: state.hotelSelectedToEdit,
     hotelEditFormErrors: newHotelEditErrors
   };
 };

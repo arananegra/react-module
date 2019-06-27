@@ -15,7 +15,6 @@ const ratingsValidator = (value: any, vm: any): FieldValidationResult => {
 
 const cityValidator = (value: any, vm: any): FieldValidationResult => {
   const isCityValid = value !== noCitySelected;
-  console.log(value, vm)
   const errorInfo = (isCityValid) ? '' : 'La ciudad no puede estar vacía';
 
   const fieldValidationResult: FieldValidationResult = new FieldValidationResult();

@@ -15,7 +15,7 @@ export const onUpdateHotelEditFieldsActionThunk = (hotelEditToUpdate: HotelEntit
     hotelFormValidation
       .validateField(hotelEditToUpdate, fieldId, value)
       .then((fieldValidationResult: FieldValidationResult) => {
-        dispatch(onUpdateHotelEditErrorsThunk(fieldValidationResult, fieldId, value))
+        dispatch(onUpdateHotelEditErrorsThunk(fieldValidationResult, fieldId))
       });
   }
 }

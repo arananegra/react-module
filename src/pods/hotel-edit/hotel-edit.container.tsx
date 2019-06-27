@@ -10,6 +10,9 @@ import { getHotelEditCityList } from "./hotel-edit.api";
 import { HotelEntityVm } from "./hotel-edit.vm";
 import { animated, useSpring } from 'react-spring'
 import { onUpdateHotelEditFieldsActionThunk } from "./actions/onUpdateHotelEditActions";
+import { hotelFormValidation } from "./hotel-edit.validation";
+import { FormValidationResult } from "lc-form-validation";
+import { onUpdateHotelEditErrorsThunk, updateHotelEditErrorsAction } from "./actions/onUpdateHotelEditErrorsActions";
 
 const useStyles = makeStyles((theme: Theme) => ({
   spinner: {
@@ -36,12 +39,6 @@ export const HotelEditContainer = () => {
 
   const [cities, setCities] = React.useState<CityApiEntityApi[]>([])
 
-  React.useEffect(() => {
-    getHotelEditCityList().then((result: CityApiEntityApi[]) => {
-      setCities(result);
-    });
-  }, []);
-
   React.useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -58,6 +55,22 @@ export const HotelEditContainer = () => {
       [fieldId]: value
     }, fieldId, value))
   };
+
+  React.useEffect(() => {
+    getHotelEditCityList().then((result: CityApiEntityApi[]) => {
+      setCities(result);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    hotelFormValidation
+      .validateForm(hotelToEdit)
+      .then((formValidationResult: FormValidationResult) => {
+        for (let [key, value] of Object.entries(formValidationResult.fieldErrors)) {
+          dispatch(onUpdateHotelEditErrorsThunk(value, value.key))
+        }
+      });
+  }, [hotelToEdit]);
 
 
   return (

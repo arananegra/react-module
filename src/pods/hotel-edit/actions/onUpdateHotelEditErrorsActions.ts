@@ -3,20 +3,18 @@ import { actionsEnums } from "common";
 
 export interface IUpdateHotelEditErrorsAction {
   type: string;
-  fieldId: string;
-  value: any;
+  fieldId: any;
   fieldValidationResult: FieldValidationResult;
 }
 
-export const updateHotelEditErrorsAction = (fieldValidationResult: FieldValidationResult, fieldId: string, value: string): IUpdateHotelEditErrorsAction => ({
-  type: actionsEnums.UPDATE_HOTEL_EDIT_ERRORS,
-  fieldId,
-  value,
-  fieldValidationResult
-});
-
-export const onUpdateHotelEditErrorsThunk = (fieldValidationResult: FieldValidationResult, fieldId: string, value: string): Function => {
+export const onUpdateHotelEditErrorsThunk = (fieldValidationResult: FieldValidationResult, fieldId: any): Function => {
   return (dispatch) => {
-    dispatch(updateHotelEditErrorsAction(fieldValidationResult, fieldId, value))
+    dispatch(updateHotelEditErrorsAction(fieldValidationResult, fieldId))
   }
 }
+
+export const updateHotelEditErrorsAction = (fieldValidationResult: FieldValidationResult, fieldId: string): IUpdateHotelEditErrorsAction => ({
+  type: actionsEnums.UPDATE_HOTEL_EDIT_ERRORS,
+  fieldId,
+  fieldValidationResult
+});
