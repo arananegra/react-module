@@ -94,14 +94,14 @@ export const HotelEditComponent = (props: Props) => {
             label={'Ciudades'}
             onChange={onChangeField}
             value={hotelToEdit.city}
-            name={'cities'}
+            name={'city'}
             items={cities}/>
         </div>
       </div>
 
       <TextFieldArea
-        name={'Description'}
-        label="Descripción"
+        name='description'
+        label='Descripción'
         value={hotelToEdit.description}
         multiline={true}
         onChange={onChangeField}

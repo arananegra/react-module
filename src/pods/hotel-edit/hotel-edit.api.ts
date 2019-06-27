@@ -13,27 +13,41 @@ export const getHotel = (id: string): Promise<HotelEntityApi> => {
   );
 }
 
+/*export const getHotel = (id: string): Promise<HotelEntityApi> => {
+  return new Promise<HotelEntityApi>((resolve, reject) =>
+    Axios.get<HotelEntityApi>(`${getHotelUrl}/${id}`)
+      .then((response) => setTimeout(() => {
+        resolve(response.data);
+      }, 1000))
+      .catch(e => reject(e))
+  );
+}*/
+
 const cities: CityApiEntityApi[] = [
   {
-    value: 'Sin ciudad',
-    id: 'Sin ciudad',
+    id: 'Ciudad no seleccionada',
+    value: 'Ciudad no seleccionada'
   },
   {
-    value: 'Málaga',
-    id: 'Málaga',
+    id: "Seattle",
+    value: "Seattle"
   },
   {
-    value: 'Chicago',
-    id: 'Chicago',
+    id: "Chicago",
+    value: "Chicago"
   },
   {
-    value: 'Barcelona',
-    id: 'Barcelona',
+    id: "New York",
+    value: "New York"
   },
   {
-    value: 'Tokyo',
-    id: 'Tokyo',
+    id: "California",
+    value: "California"
   },
+  {
+    id: "Burlingame",
+    value: "Burlingame"
+  }
 ];
 
 

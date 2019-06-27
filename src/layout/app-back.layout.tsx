@@ -23,14 +23,14 @@ export const AppBackLayoutInner = (props: Props) => {
   }
 
   const springPropsArrow = useSpring({
-    config: {tension: 200, friction: 12},
-    from: {marginLeft: -50, opacity: 1},
+    config: {tension: 200, friction: 40},
+    from: {marginLeft: -100, opacity: 1},
     to: {marginLeft: 0, opacity: 1}
   });
 
   const springPropsIcon = useSpring({
-    config: {duration: 500, tension: 200, friction: 12, delay: 100},
-    from: {marginLeft: -30, opacity: 1},
+    config: {duration: 500, tension: 200, friction: 40, delay: 200},
+    from: {marginLeft: -50, opacity: 1},
     to: {marginLeft: -5, opacity: 1}
   });
 

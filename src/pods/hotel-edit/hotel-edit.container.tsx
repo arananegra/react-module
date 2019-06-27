@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { State } from "../../reducers";
 import { HotelEditComponent } from "./hotel-edit.component";
 import { LoadingPropagateSpinnerComponent } from "../../common/components";
@@ -8,6 +8,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { CityApiEntityApi } from "../../common/api-entities/city-api.entity";
 import { getHotelEditCityList } from "./hotel-edit.api";
 import { HotelEntityVm } from "./hotel-edit.vm";
+import { animated, useSpring } from 'react-spring'
+import { onUpdateHotelEditFieldsActionThunk } from "./actions/onUpdateHotelEditActions";
 
 const useStyles = makeStyles((theme: Theme) => ({
   spinner: {
@@ -26,6 +28,12 @@ export const HotelEditContainer = () => {
     return state.hotelEdit.hotelSelectedToEdit
   });
 
+  const springProps = useSpring({
+    config: {tension: 200, friction: 40},
+    from: {marginLeft: -50, opacity: 1},
+    to: {marginLeft: 0, opacity: 1}
+  });
+
   const [cities, setCities] = React.useState<CityApiEntityApi[]>([])
 
   React.useEffect(() => {
@@ -34,15 +42,31 @@ export const HotelEditContainer = () => {
     });
   }, []);
 
+  React.useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const updateHotelEdit = (fieldId: string, value: string) => {
+    dispatch(onUpdateHotelEditFieldsActionThunk({
+      ...hotelToEdit,
+      [fieldId]: value
+    }, fieldId, value))
+  };
+
 
   return (
     <>
       <LoadingPropagateSpinnerComponent className={classes.spinner} area={'hotel-edit'}>
-        <HotelEditComponent
-          onClickSave={() => console.log('save')}
-          onChangeField={((fieldId, value) => console.log(fieldId, value))} cities={cities}
-          hotelToEdit={hotelToEdit}/>
+        <animated.div style={springProps}>
+          <HotelEditComponent
+            onClickSave={() => console.log('save')}
+            onChangeField={updateHotelEdit} cities={cities}
+            hotelToEdit={hotelToEdit}/>
+        </animated.div>
       </LoadingPropagateSpinnerComponent>
     </>
   )
