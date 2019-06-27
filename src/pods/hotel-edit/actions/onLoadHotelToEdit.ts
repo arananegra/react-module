@@ -3,9 +3,9 @@ import { HotelEntityVm } from "../hotel-edit.vm";
 import { routerSwitchRoutes, routesLinks } from "core";
 import { history } from "../../../createHistory";
 import { getHotel } from "../hotel-edit.api";
-import { mapFromApiToVm } from "../../hotel-collection/hotel-collection.mapper";
 import { toast } from "react-toastify";
 import { trackPromise } from "react-promise-tracker";
+import { mapFromApiToVm } from "../hotel-edit.mapper";
 
 export interface IOnClickEditHotelAction {
   type: string;

@@ -1,5 +1,4 @@
 import * as React from "react"
-import { HotelEntityVm } from "../hotel-collection/hotel-collection.vm";
 import { TextFieldArea, TextFieldForm } from "../../common/components";
 import StarRatings from 'react-star-ratings';
 import { Theme } from '@material-ui/core/styles';
@@ -7,6 +6,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Button from "@material-ui/core/Button";
 import { CityApiEntityApi } from "../../common/api-entities/city-api.entity";
 import { TextFieldSelect } from "../../common/components/text-field-select.component";
+import { HotelEntityVm } from "./hotel-edit.vm";
 
 const useStyles = makeStyles((theme: Theme) => ({
   formContainer: {
@@ -87,13 +87,13 @@ export const HotelEditComponent = (props: Props) => {
           />
         </div>
         <div style={{
-          width: '40vw'
+          width: '40%'
         }}>
           <TextFieldSelect
             fullWidth={true}
             label={'Ciudades'}
             onChange={onChangeField}
-            value={cities[1].value}
+            value={hotelToEdit.city}
             name={'cities'}
             items={cities}/>
         </div>
@@ -107,7 +107,6 @@ export const HotelEditComponent = (props: Props) => {
         onChange={onChangeField}
         rows={4}
         fullWidth={true}/>
-
 
       <Button onClick={onClickSave}
               style={{outline: 'none'}}

@@ -1,11 +1,13 @@
 import * as React from "react"
-import { HotelEntityVm } from "../hotel-collection/hotel-collection.vm";
 import { useSelector } from 'react-redux';
 import { State } from "../../reducers";
 import { HotelEditComponent } from "./hotel-edit.component";
 import { LoadingPropagateSpinnerComponent } from "../../common/components";
 import { Theme } from '@material-ui/core/styles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import { CityApiEntityApi } from "../../common/api-entities/city-api.entity";
+import { getHotelEditCityList } from "./hotel-edit.api";
+import { HotelEntityVm } from "./hotel-edit.vm";
 
 const useStyles = makeStyles((theme: Theme) => ({
   spinner: {
@@ -18,35 +20,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-
-const cities = [
-  {
-    value: 'Sin ciudad',
-    id: 'Sin ciudad',
-  },
-  {
-    value: 'Málaga',
-    id: 'Málaga',
-  },
-  {
-    value: 'Chicago',
-    id: 'Chicago',
-  },
-  {
-    value: 'Barcelona',
-    id: 'Barcelona',
-  },
-  {
-    value: 'Tokyo',
-    id: 'Tokyo',
-  },
-];
-
 export const HotelEditContainer = () => {
 
   const hotelToEdit: HotelEntityVm = useSelector((state: State) => {
     return state.hotelEdit.hotelSelectedToEdit
   });
+
+  const [cities, setCities] = React.useState<CityApiEntityApi[]>([])
+
+  React.useEffect(() => {
+    getHotelEditCityList().then((result: CityApiEntityApi[]) => {
+      setCities(result);
+    });
+  }, []);
 
   const classes = useStyles();
 
