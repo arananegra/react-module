@@ -119,12 +119,17 @@ export const HotelEditComponent = (props: Props) => {
             name='rating'
           />
         </div>
-        <TextFieldSelect
-          label={'Ciudades'}
-          onChange={(field, value) => console.log(field, value)}
-          value={currencies[1].value}
-          name={'Ciudades'}
-          items={currencies}/>
+        <div style={{
+          width: '40vw'
+        }}>
+          <TextFieldSelect
+            fullWidth={true}
+            label={'Ciudades'}
+            onChange={(field, value) => console.log(field, value)}
+            value={currencies[1].value}
+            name={'Ciudades'}
+            items={currencies}/>
+        </div>
       </div>
 
       <TextFieldArea

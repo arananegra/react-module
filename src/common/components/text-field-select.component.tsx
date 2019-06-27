@@ -7,6 +7,7 @@ interface Props {
   items: listEntity[]
   name: string;
   label?: string;
+  fullWidth?: boolean;
   type?: string;
   onChange: (field: string, value: string) => void;
   value: string;
@@ -25,11 +26,12 @@ const handleBlur = (field: string, onBlur) => e => {
 };
 
 export const TextFieldSelect: React.FC<Props> = (props) => {
-  const {name, label, onChange, value, error, onBlur, type, items} = props;
+  const {name, label, onChange, value, error, onBlur, type, fullWidth, items} = props;
 
   return (
     <TextField
       select
+      fullWidth={fullWidth}
       label={label}
       value={value}
       type={type}
