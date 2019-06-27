@@ -1,3 +1,3 @@
-export * from './LoginActions';
-export * from './UpdateLoginCredentialsActions';
-export * from './UpdateLoginErrorsActions';
+export * from './onLoginActions';
+export * from './onUpdateLoginCredentialsActions';
+export * from './onUpdateLoginErrorsActions';

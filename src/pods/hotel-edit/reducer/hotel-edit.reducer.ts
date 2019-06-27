@@ -1,7 +1,8 @@
 import { actionsEnums } from "common/actionEnums";
-import { createDefaultHotelEditVm, HotelEditVm } from "../hotel-edit.vm";
+import { createDefaultHotelEditVm, HotelEditFormErrors, HotelEditVm, HotelEntityVm } from "../hotel-edit.vm";
 import { IOnClickEditHotelAction } from "../actions";
 import { IUpdateHotelEditFieldsAction } from "../actions/onUpdateHotelEditActions";
+import { IUpdateHotelEditErrorsAction } from "../actions/onUpdateHotelEditErrorsActions";
 
 export type HotelEditState = HotelEditVm;
 
@@ -14,6 +15,9 @@ export const hotelEditReducer = (state: HotelEditState = defaultHotelEditState()
 
     case actionsEnums.UPDATE_HOTEL_EDIT_FIELD:
       return handleHotelEditChangeAction(state, action);
+
+    case actionsEnums.UPDATE_HOTEL_EDIT_ERRORS:
+      return handleHotelEditErrorsChangeAction(state, action)
   }
   return state;
 }
@@ -27,3 +31,21 @@ const handleHotelEditChangeAction = (state: HotelEditState, action: IUpdateHotel
   ...state,
   hotelSelectedToEdit: action.hotelEditToUpdate,
 });
+
+const handleHotelEditErrorsChangeAction = (state: HotelEditState, action: IUpdateHotelEditErrorsAction): HotelEditState => {
+  const newHotelEdit: HotelEntityVm = {
+    ...state.hotelSelectedToEdit,
+    [action.fieldId]: action.value
+  };
+
+  const newHotelEditErrors: HotelEditFormErrors = {
+    ...state.hotelEditFormErrors,
+    [action.fieldId]: action.fieldValidationResult
+  };
+
+  return {
+    ...state,
+    hotelSelectedToEdit: newHotelEdit,
+    hotelEditFormErrors: newHotelEditErrors
+  };
+};

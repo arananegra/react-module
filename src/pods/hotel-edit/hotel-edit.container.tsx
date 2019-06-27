@@ -50,6 +50,8 @@ export const HotelEditContainer = () => {
 
   const dispatch = useDispatch();
 
+  const hotelEditErrors = useSelector((state: State) => state.hotelEdit.hotelEditFormErrors)
+
   const updateHotelEdit = (fieldId: string, value: string) => {
     dispatch(onUpdateHotelEditFieldsActionThunk({
       ...hotelToEdit,
@@ -63,6 +65,7 @@ export const HotelEditContainer = () => {
       <LoadingPropagateSpinnerComponent className={classes.spinner} area={'hotel-edit'}>
         <animated.div style={springProps}>
           <HotelEditComponent
+            hotelEditErrors={hotelEditErrors}
             onClickSave={() => console.log('save')}
             onChangeField={updateHotelEdit} cities={cities}
             hotelToEdit={hotelToEdit}/>

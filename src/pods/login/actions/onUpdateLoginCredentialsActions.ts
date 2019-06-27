@@ -2,7 +2,7 @@ import { CredentialsEntityVm } from "../login.vm";
 import { actionsEnums } from "common";
 import { loginFormValidation } from "../login.validation";
 import { FieldValidationResult } from "lc-form-validation";
-import { onUpdateLoginFieldErrorsThunk } from "./UpdateLoginErrorsActions";
+import { onUpdateLoginFieldErrorsThunk } from "./onUpdateLoginErrorsActions";
 
 export interface IUpdateLoginCredentialsAction {
   type: string;
@@ -23,4 +23,4 @@ export const onUpdateLoginCredentialsActionThunk = (updatedCredentials: Credenti
 export const updateLoginCredentialsAction = (credentialsToUpdate: CredentialsEntityVm): IUpdateLoginCredentialsAction => ({
   type: actionsEnums.UPDATE_LOGIN_CREDENTIALS,
   credentialsToUpdate
-});
+})

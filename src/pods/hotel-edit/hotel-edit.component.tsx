@@ -6,7 +6,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Button from "@material-ui/core/Button";
 import { CityApiEntityApi } from "../../common/api-entities/city-api.entity";
 import { TextFieldSelect } from "../../common/components/text-field-select.component";
-import { HotelEntityVm } from "./hotel-edit.vm";
+import { HotelEditFormErrors, HotelEntityVm } from "./hotel-edit.vm";
 
 const useStyles = makeStyles((theme: Theme) => ({
   formContainer: {
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
   hotelToEdit: HotelEntityVm;
+  hotelEditErrors: HotelEditFormErrors;
   cities: CityApiEntityApi[];
   onClickSave: () => void;
   onChangeField: (fieldId: string, value: string) => void;
@@ -50,7 +51,7 @@ export const HotelEditComponent = (props: Props) => {
 
   const classes = useStyles();
 
-  const {hotelToEdit, onChangeField, cities, onClickSave} = props
+  const {hotelToEdit, onChangeField, cities, onClickSave, hotelEditErrors} = props
 
   const onStarClick = (name) => (nextValue) => {
     onChangeField(name, nextValue)
@@ -61,6 +62,7 @@ export const HotelEditComponent = (props: Props) => {
       <TextFieldForm
         label="Name"
         name="name"
+        error={hotelEditErrors.name.errorMessage}
         value={hotelToEdit.name}
         onChange={onChangeField}
       />
@@ -85,6 +87,11 @@ export const HotelEditComponent = (props: Props) => {
             numberOfStars={5}
             name='rating'
           />
+          {
+            hotelEditErrors.rating.succeeded ?
+              null :
+              <h4>Error</h4>
+          }
         </div>
         <div style={{
           width: '40%'
@@ -95,6 +102,7 @@ export const HotelEditComponent = (props: Props) => {
             onChange={onChangeField}
             value={hotelToEdit.city}
             name={'city'}
+            error={hotelEditErrors.city.errorMessage}
             items={cities}/>
         </div>
       </div>
@@ -106,7 +114,8 @@ export const HotelEditComponent = (props: Props) => {
         multiline={true}
         onChange={onChangeField}
         rows={4}
-        fullWidth={true}/>
+        fullWidth={true}
+        error={hotelEditErrors.description.errorMessage}/>
 
       <Button onClick={onClickSave}
               style={{outline: 'none'}}

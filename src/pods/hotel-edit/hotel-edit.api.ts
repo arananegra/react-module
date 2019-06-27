@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { baseApiUrl } from 'core'
+import { baseApiUrl, noCitySelected } from 'core'
 import { HotelEntityApi } from "common";
 import { CityApiEntityApi } from "../../common/api-entities/city-api.entity";
 
@@ -25,8 +25,8 @@ export const getHotel = (id: string): Promise<HotelEntityApi> => {
 
 const cities: CityApiEntityApi[] = [
   {
-    id: 'Ciudad no seleccionada',
-    value: 'Ciudad no seleccionada'
+    id: noCitySelected,
+    value: noCitySelected
   },
   {
     id: "Seattle",

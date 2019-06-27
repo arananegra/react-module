@@ -1,5 +1,5 @@
 import { FieldValidationResult } from "lc-form-validation";
-import { actionsEnums } from "../../../common/actionEnums";
+import { actionsEnums } from "common";
 
 export interface IUpdateLoginErrorsAction {
   type: string;
