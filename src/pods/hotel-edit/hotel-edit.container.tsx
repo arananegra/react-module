@@ -12,7 +12,7 @@ import { animated, useSpring } from 'react-spring'
 import { onUpdateHotelEditFieldsActionThunk } from "./actions/onUpdateHotelEditActions";
 import { hotelFormValidation } from "./hotel-edit.validation";
 import { FormValidationResult } from "lc-form-validation";
-import { onUpdateHotelEditErrorsThunk, updateHotelEditErrorsAction } from "./actions/onUpdateHotelEditErrorsActions";
+import { onUpdateHotelEditErrorsThunk } from "./actions/onUpdateHotelEditErrorsActions";
 import { onSaveHotelEditRequestThunk } from "./actions/onSaveEditHotelActions";
 
 const useStyles = makeStyles((theme: Theme) => ({

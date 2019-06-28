@@ -1,5 +1,40 @@
 import { createFormValidation, FieldValidationResult, ValidationConstraints, Validators } from "lc-form-validation";
 import { noCitySelected, noEmptyFieldValidator } from "core";
+import Axios, { AxiosResponse } from "axios";
+
+export const imageExistsAndIsValid = (url: string) => {
+  return new Promise((resolve, reject) => {
+    Axios.get(url)
+      .then((response: AxiosResponse) => {
+        //response.headers['content-type'] === ''
+        if (response.headers['content-type'].includes('image') && response.status === 200) {
+          resolve(true)
+        } else {
+          resolve(false)
+        }
+      })
+      .catch(e => {
+        resolve(false)
+      })
+  })
+}
+
+const pictureValidator = (value: any, vm: any): Promise<FieldValidationResult> => {
+  return new Promise<FieldValidationResult>((resolve, reject) => {
+    imageExistsAndIsValid(value).then((result: boolean) => {
+      const isPictureValid = result;
+      const errorInfo = (isPictureValid) ? '' : 'Imagen no valida';
+
+      const fieldValidationResult: FieldValidationResult = new FieldValidationResult();
+      fieldValidationResult.type = 'INVALID_RATING';
+      fieldValidationResult.succeeded = isPictureValid;
+      fieldValidationResult.errorMessage = errorInfo;
+
+      resolve(fieldValidationResult);
+
+    });
+  })
+}
 
 const ratingsValidator = (value: any, vm: any): FieldValidationResult => {
   const isRatingValid = value > 2;
@@ -28,7 +63,7 @@ const cityValidator = (value: any, vm: any): FieldValidationResult => {
 const hotelEditFormValidationConstraints: ValidationConstraints = {
   fields: {
     name: [{validator: noEmptyFieldValidator}],
-    picture: [{validator: Validators.required}],
+    picture: [{validator: pictureValidator}],
     description: [
       {validator: Validators.required},
       {

@@ -6,6 +6,7 @@ import { getHotel } from "../hotel-edit.api";
 import { toast } from "react-toastify";
 import { trackPromise } from "react-promise-tracker";
 import { mapFromApiToVm } from "../hotel-edit.mapper";
+import { imageExistsAndIsValid } from "../hotel-edit.validation";
 
 export interface IOnClickEditHotelAction {
   type: string;

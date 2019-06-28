@@ -5,6 +5,7 @@ import { CityApiEntityApi } from "../../common/api-entities/city-api.entity";
 
 const getHotelUrl = `${baseApiUrl}/api/hotels`;
 
+/*
 export const getHotel = (id: string): Promise<HotelEntityApi> => {
   return new Promise<HotelEntityApi>((resolve, reject) =>
     Axios.get<HotelEntityApi>(`${getHotelUrl}/${id}`)
@@ -12,16 +13,17 @@ export const getHotel = (id: string): Promise<HotelEntityApi> => {
       .catch(e => reject(e))
   );
 }
+*/
 
-/*export const getHotel = (id: string): Promise<HotelEntityApi> => {
+export const getHotel = (id: string): Promise<HotelEntityApi> => {
   return new Promise<HotelEntityApi>((resolve, reject) =>
     Axios.get<HotelEntityApi>(`${getHotelUrl}/${id}`)
       .then((response) => setTimeout(() => {
         resolve(response.data);
-      }, 1000))
+      }, 0))
       .catch(e => reject(e))
   );
-}*/
+}
 
 const cities: CityApiEntityApi[] = [
   {

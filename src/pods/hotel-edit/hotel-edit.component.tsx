@@ -90,7 +90,7 @@ export const HotelEditComponent = (props: Props) => {
           {
             !Boolean(hotelEditErrors.rating.errorMessage) ?
               null :
-              <h4>Error</h4>
+              <h4 style={{color: "red"}}>Error. El mínimo de estrellas es 3.</h4>
           }
         </div>
         <div style={{
