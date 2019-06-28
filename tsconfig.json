@@ -6,6 +6,7 @@
     "declaration": false,
     "noImplicitAny": false,
     "jsx": "react",
+    "esModuleInterop": true,
     "sourceMap": true,
     "noLib": false,
     "strictNullChecks": true,

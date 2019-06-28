@@ -6,12 +6,8 @@ const imageExistsAndIsValid = (url: string) => {
   return new Promise((resolve, reject) => {
     Axios.get(url)
       .then((response: AxiosResponse) => {
-        //response.headers['content-type'] === ''
-        if (response.headers['content-type'].includes('image') && response.status === 200) {
-          resolve(true)
-        } else {
-          resolve(false)
-        }
+        (response.headers['content-type'].includes('image') && response.status === 200) ?
+          resolve(true) : resolve(false)
       })
       .catch(e => {
         resolve(false)
