@@ -2,7 +2,7 @@ import { createFormValidation, FieldValidationResult, ValidationConstraints, Val
 import { noCitySelected, noEmptyFieldValidator } from "core";
 import Axios, { AxiosResponse } from "axios";
 
-export const imageExistsAndIsValid = (url: string) => {
+const imageExistsAndIsValid = (url: string) => {
   return new Promise((resolve, reject) => {
     Axios.get(url)
       .then((response: AxiosResponse) => {
@@ -20,13 +20,13 @@ export const imageExistsAndIsValid = (url: string) => {
 }
 
 const pictureValidator = (value: any, vm: any): Promise<FieldValidationResult> => {
-  return new Promise<FieldValidationResult>((resolve, reject) => {
+  return new Promise<FieldValidationResult>((resolve) => {
     imageExistsAndIsValid(value).then((result: boolean) => {
       const isPictureValid = result;
       const errorInfo = (isPictureValid) ? '' : 'Imagen no valida';
 
       const fieldValidationResult: FieldValidationResult = new FieldValidationResult();
-      fieldValidationResult.type = 'INVALID_RATING';
+      fieldValidationResult.type = 'INVALID_PICTURE';
       fieldValidationResult.succeeded = isPictureValid;
       fieldValidationResult.errorMessage = errorInfo;
 
