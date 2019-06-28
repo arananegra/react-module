@@ -1,35 +1,28 @@
-/*
 import { actionsEnums } from "common";
-import { CredentialsEntityVm } from "../login.vm";
-import { loginFormValidation } from "../login.validation";
 import { FormValidationResult } from "lc-form-validation";
-import { validateCredentials } from "../login.api";
-import { history } from "../../../createHistory";
-import { routerSwitchRoutes } from "core";
-import { trackPromise } from 'react-promise-tracker';
 import { toast } from 'react-toastify';
+import { HotelEntityVm } from "../hotel-edit.vm";
+import { hotelFormValidation } from "../hotel-edit.validation";
 
-export const onSaveHotelEditRequestThunk = (credentials: CredentialsEntityVm): any => {
+interface ISaveHotelEditAction {
+  type: string
+}
+
+export const onSaveHotelEditRequestThunk = (hotelEditToSave: HotelEntityVm): Function => {
   return (dispatch) => {
-    loginFormValidation.validateForm(credentials).then((formValidationResult: FormValidationResult) => {
-      if (formValidationResult.succeeded) {
-        trackPromise((validateCredentials(credentials.username, credentials.password).then(
-          areValidCredentials => {
-            if (areValidCredentials) {
-              history.push(routerSwitchRoutes.hotelCollection);
-              dispatch(onLoginSucceedAction())
-            } else {
-              toast.error("Credenciales invalidas");
-            }
-          }
-        )), 'login-button');
-      } else {
-        toast.warn("Algún campo es erroneo");
-      }
-    });
+    hotelFormValidation
+      .validateForm(hotelEditToSave)
+      .then((formValidationResult: FormValidationResult) => {
+        if (formValidationResult.succeeded) {
+          toast.success("Hotel guardado (API por implementar)");
+          dispatch(onSaveHotelEditAction())
+        } else {
+          toast.error("No se puede guardar el hotel. Revisa los campos");
+        }
+      });
   }
 }
 
-export const onLoginSucceedAction = (): any => ({
-  type: actionsEnums.ON_LOGIN_SUCCEED
-});*/
+export const onSaveHotelEditAction = (): ISaveHotelEditAction => ({
+  type: actionsEnums.ON_UPDATE_HOTEL_SUCCEED
+});

@@ -13,6 +13,7 @@ import { onUpdateHotelEditFieldsActionThunk } from "./actions/onUpdateHotelEditA
 import { hotelFormValidation } from "./hotel-edit.validation";
 import { FormValidationResult } from "lc-form-validation";
 import { onUpdateHotelEditErrorsThunk, updateHotelEditErrorsAction } from "./actions/onUpdateHotelEditErrorsActions";
+import { onSaveHotelEditRequestThunk } from "./actions/onSaveEditHotelActions";
 
 const useStyles = makeStyles((theme: Theme) => ({
   spinner: {
@@ -72,6 +73,10 @@ export const HotelEditContainer = () => {
       });
   }, [hotelToEdit]);
 
+  const onClickSave = () => {
+    dispatch(onSaveHotelEditRequestThunk(hotelToEdit))
+  }
+
 
   return (
     <>
@@ -79,7 +84,7 @@ export const HotelEditContainer = () => {
         <animated.div style={springProps}>
           <HotelEditComponent
             hotelEditErrors={hotelEditErrors}
-            onClickSave={() => console.log('save')}
+            onClickSave={onClickSave}
             onChangeField={updateHotelEdit} cities={cities}
             hotelToEdit={hotelToEdit}/>
         </animated.div>

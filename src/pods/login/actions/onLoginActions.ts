@@ -23,7 +23,7 @@ export const onLoginRequestThunk = (credentials: CredentialsEntityVm): any => {
           }
         )), 'login-button');
       } else {
-        toast.warn("Algún campo es erroneo");
+        toast.error("Algún campo es erroneo");
       }
     });
   }

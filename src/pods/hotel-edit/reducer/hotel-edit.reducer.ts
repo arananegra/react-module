@@ -18,6 +18,8 @@ export const hotelEditReducer = (state: HotelEditState = defaultHotelEditState()
 
     case actionsEnums.UPDATE_HOTEL_EDIT_ERRORS:
       return handleHotelEditErrorsChangeAction(state, action);
+    case actionsEnums.ON_UPDATE_HOTEL_SUCCEED:
+      return state;
   }
   return state;
 }
