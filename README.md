@@ -14,8 +14,12 @@
 ## Installation
 ```sh
 $ npm install
-$ npm start #start dev server
+$ npm start #start dev server on port 3002
 ```
+
+ > Credentials:  
+ > *username*: admin   
+ > *password*: test
 
 For production environments...
 
