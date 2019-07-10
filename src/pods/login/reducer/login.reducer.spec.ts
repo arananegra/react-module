@@ -1,5 +1,5 @@
-describe('Sample tests', () => {
-  it('should pass spec', () => {
+describe('Login reducer tests', () => {
+  it('should return ', () => {
     // Arrange
 
     // Act

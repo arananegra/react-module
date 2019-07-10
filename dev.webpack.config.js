@@ -17,6 +17,21 @@ module.exports = merge(common, {
         publicPath: '/'
     },
 
+    optimization: {
+        splitChunks: {
+            name: false,
+            cacheGroups: {
+                vendors: {
+                    name: 'vendor',
+                    test: /vendor$/,
+                    chunks: 'initial',
+                    enforce: true
+                }
+            },
+        },
+    },
+
+
     devServer: {
         stats: "minimal",
         historyApiFallback: true,

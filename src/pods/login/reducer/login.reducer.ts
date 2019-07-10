@@ -16,6 +16,9 @@ export const loginReducer = (state: LoginState = defaultLoginState(), action): L
 
     case actionsEnums.UPDATE_LOGIN_ERRORS:
       return handleErrorsChangeAction(state, action);
+
+    default:
+      return state;
   }
   return state;
 }
