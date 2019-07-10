@@ -16,6 +16,7 @@ module.exports = {
     },
     target: "web",
     optimization: {
+        //https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
         runtimeChunk: 'single',
         splitChunks: {
             chunks: 'all',
