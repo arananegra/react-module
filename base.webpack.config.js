@@ -12,19 +12,27 @@ module.exports = {
             core: path.resolve(__dirname, "./src/core/"),
             pods: path.resolve(__dirname, "./src/pods/"),
             common: path.resolve(__dirname, "./src/common/"),
-          }
+        }
     },
     target: "web",
     optimization: {
+        runtimeChunk: 'single',
         splitChunks: {
-            name: false,
+            chunks: 'all',
+            maxInitialRequests: Infinity,
+            minSize: 0,
             cacheGroups: {
-                vendors: {
-                    name: 'vendor',
-                    test: /vendor$/,
-                    chunks: 'initial',
-                    enforce: true
-                }
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name(module) {
+                        // get the name. E.g. node_modules/packageName/not/this/part.js
+                        // or node_modules/packageName
+                        const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+                        // npm package names are URL-safe, but some servers don't like @ symbols
+                        return `${packageName.replace('@', '')}`;
+                    },
+                },
             },
         },
     },
@@ -34,7 +42,7 @@ module.exports = {
     },
     entry: {
         styles: './index.scss',
-        vendor: ['react', 'react-dom'],
+        //vendor: ['react', 'react-dom'],
         app: [
             '../index.tsx'
         ]
