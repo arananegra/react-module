@@ -4,11 +4,14 @@
   "restoreMocks": true,
   "transformIgnorePatterns": ["<rootDir>/node_modules/"],
   "moduleNameMapper": {
-    "^common/(.*)$": "/src/common/$1",
-    "^core/(.*)$": "/src/core/$1",
-    "^layout/(.*)$": "/src/layout/$1",
-    "^pods/(.*)$": "/src/pods/$1",
-    "^scenes/(.*)$": "/src/scenes/$1"
+    "^common/(.*)$": "<rootDir>/src/common/$1",
+    "^core/(.*)$": "<rootDir>/src/core/$1",
+    "^layout/(.*)$": "<rootDir>/src/layout/$1",
+    "^pods/(.*)$": "<rootDir>/src/pods/$1",
+    "^scenes/(.*)$": "<rootDir>/src/scenes/$1"
   },
-  "setupFilesAfterEnv": ["@testing-library/react/cleanup-after-each"]
+  "setupFilesAfterEnv": ["@testing-library/react/cleanup-after-each"],
+  "modulePaths": [
+    "<rootDir>"
+  ]
 }

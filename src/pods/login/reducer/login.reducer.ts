@@ -4,7 +4,7 @@ import { IUpdateLoginCredentialsAction, IUpdateLoginErrorsAction } from "../acti
 
 export type LoginState = LoginVm;
 
-const defaultLoginState = (): LoginState => createDefaultLoginVm();
+export const defaultLoginState = (): LoginState => createDefaultLoginVm();
 
 export const loginReducer = (state: LoginState = defaultLoginState(), action): LoginState => {
   switch (action.type) {
@@ -20,7 +20,6 @@ export const loginReducer = (state: LoginState = defaultLoginState(), action): L
     default:
       return state;
   }
-  return state;
 }
 
 const handleCredentialsChangeAction = (state: LoginState, action: IUpdateLoginCredentialsAction): LoginState => ({
