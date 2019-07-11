@@ -4,13 +4,17 @@ import configureStore from 'redux-mock-store';
 import reduxThunk from 'redux-thunk';
 import { loginFormValidation } from "../login.validation";
 import * as validateApi from '../login.api';
+jest.mock("../../../createHistory");
 import { history } from "../../../createHistory";
 import { routerSwitchRoutes } from "core/routes";
-
+import { actionsEnums } from "common/actionEnums";
 const middlewares = [reduxThunk];
 const getMockStore = configureStore(middlewares);
 
 describe('On Login actions tests', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   it('should call to validateForm with credentials entity', (done) => {
     // Arrange
     const credentials: CredentialsEntityVm = {isUserLogged: false, password: '123', username: 'pako'};
@@ -43,7 +47,7 @@ describe('On Login actions tests', () => {
         done();
       });
   });
-  it('should call to history.push with when login is successful', (done) => {
+  it('should call to history.push when login is successful', (done) => {
     // Arrange
     const credentials: CredentialsEntityVm = {isUserLogged: false, password: 'test', username: 'admin'};
     const store = getMockStore();
@@ -58,6 +62,23 @@ describe('On Login actions tests', () => {
         expect(historyPushStub).toHaveBeenCalledWith(routerSwitchRoutes.hotelCollection);
         done();
       });
+  });
+  it('should call to onLoginSucceedAction action creator when login is successful', (done) => {
+    // Arrange
+    const credentials: CredentialsEntityVm = {isUserLogged: false, password: 'test', username: 'admin'};
+    const store = getMockStore();
 
+    const historyPushStub = jest.spyOn(history, 'push');
+    const validateApiLogin = jest.spyOn(validateApi, 'validateCredentials')
+      .mockResolvedValue(true);
+
+    // Act
+    store.dispatch<any>(onLoginRequestThunk(credentials))
+      .then(() => {
+        // Assert
+        let expectedAction = store.getActions()[0];
+        expect(expectedAction.type).toEqual(actionsEnums.ON_LOGIN_SUCCEED);
+        done();
+      });
   });
 });
