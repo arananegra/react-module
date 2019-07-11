@@ -5,9 +5,11 @@ import reduxThunk from 'redux-thunk';
 import { loginFormValidation } from "../login.validation";
 import * as validateApi from '../login.api';
 jest.mock("../../../createHistory");
+import { toast } from 'react-toastify';
 import { history } from "../../../createHistory";
 import { routerSwitchRoutes } from "core/routes";
 import { actionsEnums } from "common/actionEnums";
+
 const middlewares = [reduxThunk];
 const getMockStore = configureStore(middlewares);
 
@@ -78,6 +80,23 @@ describe('On Login actions tests', () => {
         // Assert
         let expectedAction = store.getActions()[0];
         expect(expectedAction.type).toEqual(actionsEnums.ON_LOGIN_SUCCEED);
+        done();
+      });
+  });
+  it('should call to toast.error when credentials are invalid', (done) => {
+    // Arrange
+    const credentials: CredentialsEntityVm = {isUserLogged: false, password: 'test', username: 'admin'};
+    const store = getMockStore();
+
+    const validateApiLogin = jest.spyOn(validateApi, 'validateCredentials')
+      .mockResolvedValue(false);
+
+    toast.error = jest.fn();
+    // Act
+    store.dispatch<any>(onLoginRequestThunk(credentials))
+      .then(() => {
+        // Assert
+        expect(toast.error).toHaveBeenCalled();
         done();
       });
   });
