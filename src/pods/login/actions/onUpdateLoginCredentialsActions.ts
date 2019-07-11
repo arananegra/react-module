@@ -1,5 +1,5 @@
 import { CredentialsEntityVm } from "../login.vm";
-import { actionsEnums } from "common";
+import { actionsEnums } from "common/actionEnums";
 import { loginFormValidation } from "../login.validation";
 import { FieldValidationResult } from "lc-form-validation";
 import { onUpdateLoginFieldErrorsThunk } from "./onUpdateLoginErrorsActions";

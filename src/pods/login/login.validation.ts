@@ -1,5 +1,5 @@
 import { createFormValidation, ValidationConstraints } from "lc-form-validation";
-import { noEmptyFieldValidator } from "core";
+import { noEmptyFieldValidator } from "core/validations";
 
 const loginFormValidationConstraints: ValidationConstraints = {
   fields: {
