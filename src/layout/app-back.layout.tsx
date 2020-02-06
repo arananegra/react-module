@@ -58,4 +58,4 @@ export const AppBackLayoutInner = (props: Props) => {
   );
 };
 
-export const AppBackLayout = withRouter<Props>(AppBackLayoutInner);
+export const AppBackLayout = withRouter(AppBackLayoutInner);

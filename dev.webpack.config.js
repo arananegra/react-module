@@ -57,16 +57,18 @@ module.exports = merge(common, {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
-                            localIdentName: '[name]_[local]_[hash:base64:5]',
+                            modules: {
+                                localIdentName: '[path][name]---[local]',
+                            },
+                            localsConvention: 'camelCase',
                         },
                     },
                     {
-                        loader: 'sass-loader', 
+                        loader: 'sass-loader',
                         options: {
                             implementation: require('sass'),
-                        }
-                    }
+                        },
+                    },
                 ],
             },
             {

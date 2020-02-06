@@ -15,10 +15,6 @@ module.exports = {
         }
     },
     target: "web",
-    node: {
-        fs: "empty",
-        net: "empty"
-    },
     entry: {
         styles: './index.scss',
         //vendor: ['react', 'react-dom'],
@@ -35,18 +31,41 @@ module.exports = {
                 loader: 'babel-loader',
             },
             {
-                test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)/,
-                use: "url-loader?limit=10000"
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+                options: {
+                    esModule: false
+                }
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+                options: {
+                    esModule: false
+                }
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file-loader',
+                options: {
+                    esModule: false
+                }
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file-loader?mimetype=image/svg+xml'
+                loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+                options: {
+                    esModule: false
+                }
             },
             {
-                test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.mp4$|\.wav$|\.mp3$/,
-                use: 'file-loader?name=[name].[hash].[ext]'
-            }
-        ]
+                test: /\.(png|jpg|jpeg|ico|gif)?$/,
+                loader: 'url-loader?limit=10000',
+                options: {
+                    esModule: false
+                }
+            },
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({

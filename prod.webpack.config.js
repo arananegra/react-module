@@ -50,23 +50,25 @@ module.exports = merge(common, {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
-                            localIdentName: '[name]_[local]_[hash:base64:5]',
+                            modules: {
+                                localIdentName: '[name]_[local]_[hash]',
+                            },
+                            localsConvention: 'camelCase',
                         },
                     },
                     {
                         loader: 'sass-loader',
                         options: {
                             implementation: require('sass'),
-                        }
-                    }
+                        },
+                    },
                 ],
             },
             {
                 test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
-        ]
+        ],
     },
 
     plugins: [
