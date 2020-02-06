@@ -2,10 +2,10 @@ import * as React from 'react';
 import { CenteredLayout } from 'layout';
 import { LoginContainer } from "../pods/login";
 
-export const LoginScene = () => {
+export const LoginScene = (props) => {
   return (
     <CenteredLayout>
-      <LoginContainer/>
+      <LoginContainer {...props}/>
     </CenteredLayout>
   )
 }
