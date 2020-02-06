@@ -41,9 +41,7 @@ export const LoginContainer = () => {
 		fromObject = {pathname: routerSwitchRoutes.hotelCollection};
 	}
 
-	console.log(credentials);
 	if (credentials.isUserLogged) {
-		console.log("rendering redirect")
 		return <Redirect to={fromObject}/>
 	} else {
 		return (
