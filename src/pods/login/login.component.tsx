@@ -45,9 +45,6 @@ export const LoginComponent = (props: Props) => {
               onChange={updateCredentials}
               error={errors.password.errorMessage}
             />
-            <LoadingCircularSpinnerComponent
-              area="login-button"
-              className={classes.spinner}>
               <Button
                 onClick={onLogin}
                 type="submit"
@@ -56,7 +53,6 @@ export const LoginComponent = (props: Props) => {
                 color="primary">
                 Login
               </Button>
-            </LoadingCircularSpinnerComponent>
           </div>
         </CardContent>
       </Card>

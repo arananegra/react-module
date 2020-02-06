@@ -1,9 +1,12 @@
+import { connectRouter } from 'connected-react-router';
 import { loginReducer, LoginState } from 'pods/login/reducer/login.reducer';
 import { combineReducers } from 'redux';
+import { history } from './createHistory';
 import { hotelEditReducer, HotelEditState } from "./pods/hotel-edit/reducer/hotel-edit.reducer";
 import { hotelCollectionReducer, HotelCollectionState } from "./pods/hotel-collection/reducer/hotel-collection.reducer";
 import { persistReducer } from 'redux-persist'
 import storageSession from 'redux-persist/lib/storage/session'
+import storage from 'redux-persist/lib/storage'
 
 export interface State {
 	login: LoginState;
@@ -19,5 +22,7 @@ export const reducers = combineReducers<State>({
 
 const persistConfig = {
 	key: 'root',
-	storage: storageSession,
+	storage,
 }
+
+export const persistedReducer = persistReducer(persistConfig, reducers)

@@ -4,7 +4,8 @@ import { State } from "reducers";
 import { onLoginRequestThunk, onUpdateLoginCredentialsActionThunk } from './actions';
 import { CredentialsEntityVm, LoginFormErrors } from "./login.vm";
 import { LoginComponent } from "./login.component";
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
+import { routerSwitchRoutes } from "core";
 
 export const useLoginCredentials = () => {
 	const dispatch = useDispatch();
@@ -29,19 +30,27 @@ export const useLoginCredentials = () => {
 	return {credentials, errors, updateCredentials, onLogin}
 }
 
-export const LoginContainer = (props) => {
+export const LoginContainer = () => {
 
 	const {credentials, errors, updateCredentials, onLogin} = useLoginCredentials();
-	const {from} = props.location.state || {from: {pathname: '/'}};
-
-	if (credentials.isUserLogged) {
-		return <Redirect to={from}/>
+	const location = useLocation() as any;
+	let fromObject;
+	if (location.state) {
+		fromObject = location.state.from;
+	} else {
+		fromObject = {pathname: routerSwitchRoutes.hotelCollection};
 	}
 
-	return (
-		<>
-			<LoginComponent credentials={credentials} errors={errors} onLogin={onLogin}
-											updateCredentials={updateCredentials}/>
-		</>
-	);
+	console.log(credentials);
+	if (credentials.isUserLogged) {
+		console.log("rendering redirect")
+		return <Redirect to={fromObject}/>
+	} else {
+		return (
+			<>
+				<LoginComponent credentials={credentials} errors={errors} onLogin={onLogin}
+												updateCredentials={updateCredentials}/>
+			</>
+		);
+	}
 }
