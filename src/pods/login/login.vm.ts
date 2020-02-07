@@ -1,4 +1,22 @@
-import { FieldValidationResult } from "lc-form-validation";
+import { createDefaultValidationResult, ValidationResult } from "@lemoncode/fonk";
+
+import { types } from "mobx-state-tree";
+
+/*const Credentials = types
+  .model("Credentials", {
+    username: '',
+    password: '',
+    isUserLogged: false
+  })
+  .actions(self => ({
+    updateCredentials(credentials) {
+      self.username = credentials.username;
+      self.password = credentials.password;
+    },
+    changeAuthFlag(logged: boolean) {
+      self.isUserLogged = logged;
+    }
+  }));*/
 
 export interface CredentialsEntityVm {
   username: string;
@@ -13,13 +31,13 @@ export const createEmptyCredentials = (): CredentialsEntityVm => ({
 });
 
 export interface LoginFormErrors {
-  username: FieldValidationResult;
-  password: FieldValidationResult;
+  username: ValidationResult;
+  password: ValidationResult;
 }
 
 export const createDefaultLoginFormErrors = (): LoginFormErrors => ({
-  username: new FieldValidationResult(),
-  password: new FieldValidationResult(),
+  username: createDefaultValidationResult(),
+  password: createDefaultValidationResult(),
 })
 
 export interface LoginVm {

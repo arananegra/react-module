@@ -1,4 +1,10 @@
-import { createFormValidation, FieldValidationResult, ValidationConstraints, Validators } from "lc-form-validation";
+import {
+  Validators,
+  createFormValidation,
+  ValidationSchema,
+  ValidationResult,
+  createDefaultValidationResult
+} from '@lemoncode/fonk';
 import { noCitySelected, noEmptyFieldValidator } from "core";
 import Axios, { AxiosResponse } from "axios";
 
@@ -15,16 +21,17 @@ const imageExistsAndIsValid = (url: string) => {
   })
 }
 
-const pictureValidator = (value: any, vm: any): Promise<FieldValidationResult> => {
-  return new Promise<FieldValidationResult>((resolve) => {
+const pictureValidator = (fieldValidatorArgs): Promise<ValidationResult> => {
+  const { value, values } = fieldValidatorArgs;
+  return new Promise<ValidationResult>((resolve) => {
     imageExistsAndIsValid(value).then((result: boolean) => {
       const isPictureValid = result;
       const errorInfo = (isPictureValid) ? '' : 'Imagen no valida';
 
-      const fieldValidationResult: FieldValidationResult = new FieldValidationResult();
+      const fieldValidationResult: ValidationResult = createDefaultValidationResult();
       fieldValidationResult.type = 'INVALID_PICTURE';
       fieldValidationResult.succeeded = isPictureValid;
-      fieldValidationResult.errorMessage = errorInfo;
+      fieldValidationResult.message = errorInfo;
 
       resolve(fieldValidationResult);
 
@@ -32,43 +39,45 @@ const pictureValidator = (value: any, vm: any): Promise<FieldValidationResult> =
   })
 }
 
-const ratingsValidator = (value: any, vm: any): FieldValidationResult => {
+const ratingsValidator = (fieldValidatorArgs): ValidationResult => {
+  const { value, values } = fieldValidatorArgs;
   const isRatingValid = value > 2;
   const errorInfo = (isRatingValid) ? '' : 'Rating no valido';
 
-  const fieldValidationResult: FieldValidationResult = new FieldValidationResult();
+  const fieldValidationResult: ValidationResult = createDefaultValidationResult();
   fieldValidationResult.type = 'INVALID_RATING';
   fieldValidationResult.succeeded = isRatingValid;
-  fieldValidationResult.errorMessage = errorInfo;
+  fieldValidationResult.message = errorInfo;
 
   return fieldValidationResult;
 }
 
-const cityValidator = (value: any, vm: any): FieldValidationResult => {
+const cityValidator = (fieldValidatorArgs): ValidationResult => {
+  const { value, values } = fieldValidatorArgs;
   const isCityValid = value !== noCitySelected;
   const errorInfo = (isCityValid) ? '' : 'La ciudad no puede estar vacía';
 
-  const fieldValidationResult: FieldValidationResult = new FieldValidationResult();
+  const fieldValidationResult: ValidationResult = createDefaultValidationResult();
   fieldValidationResult.type = 'INVALID_CITY';
   fieldValidationResult.succeeded = isCityValid;
-  fieldValidationResult.errorMessage = errorInfo;
+  fieldValidationResult.message = errorInfo;
 
   return fieldValidationResult;
 }
 
-const hotelEditFormValidationConstraints: ValidationConstraints = {
-  fields: {
+const hotelEditFormValidationConstraints: ValidationSchema = {
+  field: {
     name: [{validator: noEmptyFieldValidator}],
     picture: [{validator: pictureValidator}],
     description: [
       {validator: Validators.required},
       {
         validator: Validators.minLength,
-        customParams: {length: 24},
+        customArgs: {length: 24},
       },
       {
         validator: Validators.maxLength,
-        customParams: {length: 256},
+        customArgs: {length: 256},
       }
     ],
     city: [
@@ -78,8 +87,6 @@ const hotelEditFormValidationConstraints: ValidationConstraints = {
     rating: [
       {validator: ratingsValidator},
     ]
-
-
   }
 }
 

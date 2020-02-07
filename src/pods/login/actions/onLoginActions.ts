@@ -1,7 +1,7 @@
 import { actionsEnums } from "common/actionEnums";
 import { CredentialsEntityVm } from "../login.vm";
 import { loginFormValidation } from "../login.validation";
-import { FormValidationResult } from "lc-form-validation";
+import { FormValidationResult } from "@lemoncode/fonk";
 import { validateCredentials } from "../login.api";
 import { trackPromise } from 'react-promise-tracker';
 import { toast } from 'react-toastify';

@@ -1,13 +1,15 @@
-import { FieldValidationResult } from "lc-form-validation";
+import { createDefaultValidationResult, ValidationResult } from '@lemoncode/fonk';
 
-export const noEmptyFieldValidator = (value: any, vm: any): FieldValidationResult => {
-  const passwordAndUsernameAreValid = Boolean(value);
-  const errorInfo = (passwordAndUsernameAreValid) ? '' : 'El campo no puede estar vacío';
+export const noEmptyFieldValidator = (fieldValidatorArgs): ValidationResult => {
+	const {value, values} = fieldValidatorArgs;
 
-  const fieldValidationResult: FieldValidationResult = new FieldValidationResult();
-  fieldValidationResult.type = 'NO_EMPTY_FIELD';
-  fieldValidationResult.succeeded = passwordAndUsernameAreValid;
-  fieldValidationResult.errorMessage = errorInfo;
+	const passwordAndUsernameAreValid = Boolean(value);
+	const errorInfo = (passwordAndUsernameAreValid) ? '' : 'El campo no puede estar vacío';
 
-  return fieldValidationResult;
+	const fieldValidationResult: ValidationResult = createDefaultValidationResult();
+	fieldValidationResult.type = 'NO_EMPTY_FIELD';
+	fieldValidationResult.succeeded = passwordAndUsernameAreValid;
+	fieldValidationResult.message = errorInfo;
+
+	return fieldValidationResult;
 }

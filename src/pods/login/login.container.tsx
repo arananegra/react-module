@@ -18,10 +18,7 @@ export const useLoginCredentials = () => {
 	});
 
 	const updateCredentials = (fieldId: string, value: string) => {
-		dispatch(onUpdateLoginCredentialsActionThunk({
-			...credentials,
-			[fieldId]: value
-		}, fieldId, value))
+		dispatch(onUpdateLoginCredentialsActionThunk(fieldId, value))
 	};
 
 	const onLogin = () => {
@@ -31,7 +28,6 @@ export const useLoginCredentials = () => {
 }
 
 export const LoginContainer = () => {
-
 	const {credentials, errors, updateCredentials, onLogin} = useLoginCredentials();
 	const location = useLocation() as any;
 	let fromObject;

@@ -35,7 +35,7 @@ export const LoginComponent = (props: Props) => {
               name="username"
               value={credentials.username}
               onChange={updateCredentials}
-              error={errors.username.errorMessage}
+              error={errors.username.message}
             />
             <TextFieldForm
               label="Password"
@@ -43,7 +43,7 @@ export const LoginComponent = (props: Props) => {
               type="password"
               value={credentials.password}
               onChange={updateCredentials}
-              error={errors.password.errorMessage}
+              error={errors.password.message}
             />
               <Button
                 onClick={onLogin}

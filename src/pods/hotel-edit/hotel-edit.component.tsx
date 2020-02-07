@@ -62,7 +62,7 @@ export const HotelEditComponent = (props: Props) => {
       <TextFieldForm
         label="Name"
         name="name"
-        error={hotelEditErrors.name.errorMessage}
+        error={hotelEditErrors.name.message}
         value={hotelToEdit.name}
         onChange={onChangeField}
       />
@@ -88,7 +88,7 @@ export const HotelEditComponent = (props: Props) => {
             name='rating'
           />
           {
-            !Boolean(hotelEditErrors.rating.errorMessage) ?
+            !Boolean(hotelEditErrors.rating.message) ?
               null :
               <h4 style={{color: "red"}}>Error. El mínimo de estrellas es 3.</h4>
           }
@@ -102,7 +102,7 @@ export const HotelEditComponent = (props: Props) => {
             onChange={onChangeField}
             value={hotelToEdit.city}
             name={'city'}
-            error={hotelEditErrors.city.errorMessage}
+            error={hotelEditErrors.city.message}
             items={cities}/>
         </div>
       </div>
@@ -115,7 +115,7 @@ export const HotelEditComponent = (props: Props) => {
         onChange={onChangeField}
         rows={4}
         fullWidth={true}
-        error={hotelEditErrors.description.errorMessage}/>
+        error={hotelEditErrors.description.message}/>
 
       <Button onClick={onClickSave}
               style={{outline: 'none'}}

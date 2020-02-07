@@ -1,7 +1,7 @@
 import { CredentialsEntityVm } from "../login.vm";
 import { actionsEnums } from "common/actionEnums";
 import { loginFormValidation } from "../login.validation";
-import { FieldValidationResult } from "lc-form-validation";
+import { ValidationResult } from "@lemoncode/fonk";
 import { onUpdateLoginFieldErrorsThunk } from "./onUpdateLoginErrorsActions";
 
 export interface IUpdateLoginCredentialsAction {
@@ -9,12 +9,16 @@ export interface IUpdateLoginCredentialsAction {
   credentialsToUpdate: CredentialsEntityVm;
 }
 
-export const onUpdateLoginCredentialsActionThunk = (updatedCredentials: CredentialsEntityVm, fieldId: string, value: string): Function => {
-  return (dispatch) => {
-    dispatch(updateLoginCredentialsAction(updatedCredentials))
+export const onUpdateLoginCredentialsActionThunk = (fieldId: string, value: string): Function => {
+  return (dispatch, getState) => {
+    const credentialsUpdatedFromPage = {
+      ...getState().login.credentials,
+      [fieldId]: value
+    }
+    dispatch(updateLoginCredentialsAction(credentialsUpdatedFromPage))
     loginFormValidation
-      .validateField(updatedCredentials, fieldId, value)
-      .then((fieldValidationResult: FieldValidationResult) => {
+      .validateField(fieldId, value, credentialsUpdatedFromPage)
+      .then((fieldValidationResult: ValidationResult) => {
         dispatch(onUpdateLoginFieldErrorsThunk(fieldValidationResult, fieldId, value))
       });
   }
